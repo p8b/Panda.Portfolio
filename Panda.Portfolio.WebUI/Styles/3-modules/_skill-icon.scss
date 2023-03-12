@@ -1,0 +1,15 @@
+﻿.skill-icon {
+    height: 3rem;
+    width: auto;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
+    @include animated;
+    @include slow;
+
+    &-bg-white {
+        @extend .skill-icon;
+        background-color: aliceblue;
+        border-radius: 30%;
+    }
+}

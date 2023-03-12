@@ -1,0 +1,10 @@
+﻿<ArrowSection SectionTitle="@($"Theme ({(AppState.Settings.IsDarkTheme ? "Dark": "Light")})")">
+    <MudToggleIconButton
+        Toggled="@AppState.Settings.IsDarkTheme"
+        ToggledChanged="AppState.ToggleTheme"
+        Title="Dark"
+        Color="@Color.Dark"
+        Icon="@Icons.Material.Filled.DarkMode"
+        ToggledTitle="Light"
+        ToggledIcon="@Icons.Material.Filled.LightMode"/>
+</ArrowSection>

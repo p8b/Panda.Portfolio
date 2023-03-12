@@ -1,0 +1,114 @@
+// == The one to rule them all.
+// ==================================================
+
+// == Base: required for all
+@import "animations/mixins";
+@import "animations/base";
+
+// == Effects: optional, import the ones you are going to use
+// = Attention seekers
+@import "animations/attention_seekers/bounce";
+@import "animations/attention_seekers/flash";
+@import "animations/attention_seekers/headShake";
+@import "animations/attention_seekers/heartBeat";
+@import "animations/attention_seekers/jello";
+@import "animations/attention_seekers/pulse";
+@import "animations/attention_seekers/rubberBand";
+@import "animations/attention_seekers/shake";
+@import "animations/attention_seekers/swing";
+@import "animations/attention_seekers/tada";
+@import "animations/attention_seekers/wobble";
+
+// = Bauncing entrances
+@import "animations/bouncing_entrances/bounceIn";
+@import "animations/bouncing_entrances/bounceInDown";
+@import "animations/bouncing_entrances/bounceInLeft";
+@import "animations/bouncing_entrances/bounceInRight";
+@import "animations/bouncing_entrances/bounceInUp";
+
+// = Bouncing exits
+@import "animations/bouncing_exits/bounceOut";
+@import "animations/bouncing_exits/bounceOutDown";
+@import "animations/bouncing_exits/bounceOutLeft";
+@import "animations/bouncing_exits/bounceOutRight";
+@import "animations/bouncing_exits/bounceOutUp";
+
+// = Fading entrances
+@import "animations/fading_entrances/fadeIn";
+@import "animations/fading_entrances/fadeInDown";
+@import "animations/fading_entrances/fadeInDownBig";
+@import "animations/fading_entrances/fadeInLeft";
+@import "animations/fading_entrances/fadeInLeftBig";
+@import "animations/fading_entrances/fadeInRight";
+@import "animations/fading_entrances/fadeInRightBig";
+@import "animations/fading_entrances/fadeInUp";
+@import "animations/fading_entrances/fadeInUpBig";
+
+// = Fading exits
+@import "animations/fading_exits/fadeOut";
+@import "animations/fading_exits/fadeOutDown";
+@import "animations/fading_exits/fadeOutDownBig";
+@import "animations/fading_exits/fadeOutLeft";
+@import "animations/fading_exits/fadeOutLeftBig";
+@import "animations/fading_exits/fadeOutRight";
+@import "animations/fading_exits/fadeOutRightBig";
+@import "animations/fading_exits/fadeOutUp";
+@import "animations/fading_exits/fadeOutUpBig";
+
+// = Flippers
+@import "animations/flippers/flip";
+@import "animations/flippers/flipInX";
+@import "animations/flippers/flipInY";
+@import "animations/flippers/flipOutX";
+@import "animations/flippers/flipOutY";
+
+// = Lightspeed
+@import "animations/lightspeed/lightSpeedIn";
+@import "animations/lightspeed/lightSpeedOut";
+
+// = Rotating entrances
+@import "animations/rotating_entrances/rotateIn";
+@import "animations/rotating_entrances/rotateInDownLeft";
+@import "animations/rotating_entrances/rotateInDownRight";
+@import "animations/rotating_entrances/rotateInUpLeft";
+@import "animations/rotating_entrances/rotateInUpRight";
+
+// = Rotating exits
+@import "animations/rotating_exits/rotateOut";
+@import "animations/rotating_exits/rotateOutDownLeft";
+@import "animations/rotating_exits/rotateOutDownRight";
+@import "animations/rotating_exits/rotateOutUpLeft";
+@import "animations/rotating_exits/rotateOutUpRight";
+
+// = Sliding entrances
+@import "animations/sliding_entrances/slideInDown";
+@import "animations/sliding_entrances/slideInLeft";
+@import "animations/sliding_entrances/slideInRight";
+@import "animations/sliding_entrances/slideInUp";
+
+// = Sliding exits
+@import "animations/sliding_exits/slideOutDown";
+@import "animations/sliding_exits/slideOutLeft";
+@import "animations/sliding_exits/slideOutRight";
+@import "animations/sliding_exits/slideOutUp";
+
+// = Specials
+@import "animations/specials/hinge";
+@import "animations/specials/jackInTheBox";
+@import "animations/specials/rollIn";
+@import "animations/specials/rollOut";
+@import "animations/specials/rotate";
+
+// = Zooming entrances
+@import "animations/zooming_entrances/zoomIn";
+@import "animations/zooming_entrances/zoomInDown";
+@import "animations/zooming_entrances/zoomInLeft";
+@import "animations/zooming_entrances/zoomInRight";
+@import "animations/zooming_entrances/zoomInUp";
+
+// = Zooming exits
+@import "animations/zooming_exits/zoomOut";
+@import "animations/zooming_exits/zoomOutDown";
+@import "animations/zooming_exits/zoomOutLeft";
+@import "animations/zooming_exits/zoomOutRight";
+@import "animations/zooming_exits/zoomOutUp";

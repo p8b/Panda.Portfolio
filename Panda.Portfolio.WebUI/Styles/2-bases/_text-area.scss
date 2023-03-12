@@ -1,0 +1,19 @@
+﻿textarea {
+    //    border: 1px solid #888;
+    border-width: .15rem !important;
+    border-color: rgb(128, 128, 128) !important;
+
+    &:focus {
+        border-color: rgb(128, 128, 128) !important;
+        //  -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    &.valid {
+        border: 0.15rem solid rgb(34, 180, 53) !important;
+    }
+
+    &.danger {
+        border: 0.15rem solid rgb(189, 28, 28) !important;
+    }
+}

@@ -1,0 +1,38 @@
+﻿@import "../1-tools/_radius.scss";
+
+input {
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 0px none;
+    outline: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-bottom: 0.15rem solid rgb(128, 128, 128);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem !important;
+    @extend .radius-none-b;
+
+
+    body.dark-theme & {
+        border-bottom: 0.15rem solid rgb(255, 255, 255);
+        color: white !important;
+    }
+
+    &.danger {
+        border-bottom: 0.15rem solid rgb(189, 28, 28) !important;
+    }
+
+    &.valid {
+        border-bottom: 0.15rem solid rgb(34, 180, 53) !important;
+    }
+
+    &:focus {
+        background-color: white;
+
+        body.dark-theme & {
+            background-color: rgb(46, 46, 46);
+        }
+    }
+}

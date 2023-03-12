@@ -1,0 +1,50 @@
+﻿.checkbox {
+    display: none;
+
+    &.color-style-checked:checked + label {
+
+        &:before {
+            color: rgb(0, 205, 27);
+            @include rubberBand;
+            @include fast;
+        }
+    }
+
+    &.color-style:checked + label {
+        &:before {
+            color: rgb(0, 205, 27);
+            @include shakeY;
+            @include fast;
+        }
+    }
+
+    & + label {
+        user-select: none;
+        cursor: pointer;
+
+        &:before {
+            display: inline-block;
+            cursor: pointer;
+            content: "\f0c8";
+            font-family: "FA5 Regular";
+            padding-right: .3rem;
+        }
+    }
+
+    &.color-style + label {
+        &:before {
+            color: rgb(255, 0, 0);
+            @include shakeX;
+            @include fast;
+        }
+    }
+
+    &:checked + label {
+        &:before {
+            content: "\f14a";
+            display: inline-block;
+            font-family: "FA5 Regular";
+            padding-right: .3rem;
+        }
+    }
+}

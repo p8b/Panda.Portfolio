@@ -1,0 +1,21 @@
+﻿.custom-card {
+    border: .2rem solid rgba(67, 67, 67, 0.60);
+
+    body.dark-theme & {
+        border: .2rem solid rgb(255, 255, 255);
+    }
+}
+
+.custom-card-img {
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: .2rem;
+
+    &:hover {
+
+        @include pulse;
+        @include animated;
+        @include slower;
+        @include infinite;
+    }
+}

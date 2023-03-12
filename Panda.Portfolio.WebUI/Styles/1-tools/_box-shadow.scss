@@ -1,0 +1,16 @@
+﻿.shadow-all {
+    box-shadow: 0 0 .5rem LightThemeBoxShadowColor(.3);
+
+    body.dark-theme & {
+        box-shadow: 0 0 1rem DarkThemeBoxShadowColor(.3);
+    }
+
+    &-lg {
+        @extend .shadow-all;
+        box-shadow: 0 0 1rem LightThemeBoxShadowColor(.58) !important;
+
+        body.dark-theme & {
+            box-shadow: 0 0 1.5rem DarkThemeBoxShadowColor(.58) !important;
+        }
+    }
+}

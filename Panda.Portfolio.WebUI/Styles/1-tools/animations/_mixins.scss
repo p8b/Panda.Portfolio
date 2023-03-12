@@ -1,0 +1,421 @@
+// == Mixins
+// ==================================================
+
+// == Keyframes (create keyframes for animation)
+// = @param $animation-name (string) - keyframes (and animation) name (no spaces)
+@mixin keyframes($animation-name) {
+    @at-root {
+        // @-moz-keyframes #{$animation-name} {
+        //   @content;
+        // }
+        // @-webkit-keyframes #{$animation-name} {
+        //   @content;
+        // }
+        // @-o-keyframes #{$animation-name} {
+        //   @content;
+        // }
+        // @-ms-keyframes #{$animation-name} {
+        //   @content;
+        // }
+        @keyframes #{$animation-name} {
+            @content;
+        }
+    }
+}
+
+// == Animated
+@mixin animated($animation-duration-time: 1s, $animation-fill-mode: both) {
+    animation-duration: $animation-duration-time;
+    animation-fill-mode: $animation-fill-mode;
+}
+
+// == Media with reduced motion
+@mixin reduced-motion {
+    @media (prefers-reduced-motion) {
+        animation: unset !important;
+        transition: none !important;
+    }
+}
+
+// == Infinite
+@mixin infinite {
+    animation-iteration-count: infinite;
+}
+
+// == Varying animation duration (speed)
+@mixin fast($animation-duration-time: .8s) {
+    animation-duration: $animation-duration-time;
+}
+
+@mixin faster($animation-duration-time: .5s) {
+    animation-duration: $animation-duration-time;
+}
+
+@mixin slow($animation-duration-time: 2s) {
+    animation-duration: $animation-duration-time;
+}
+
+@mixin slower($animation-duration-time: 3s) {
+    animation-duration: $animation-duration-time;
+}
+
+// == Varying animation delay
+@mixin delay-1s($animation-delay-time: 1s) {
+    animation-delay: $animation-delay-time;
+}
+
+@mixin delay-2s($animation-delay-time: 2s) {
+    animation-delay: $animation-delay-time;
+}
+
+@mixin delay-3s($animation-delay-time: 3s) {
+    animation-delay: $animation-delay-time;
+}
+
+@mixin delay-4s($animation-delay-time: 4s) {
+    animation-delay: $animation-delay-time;
+}
+
+@mixin delay-5s($animation-delay-time: 5s) {
+    animation-delay: $animation-delay-time;
+}
+
+// == Animation effects
+// = Attention seekers
+@mixin bounce {
+    animation-name: bounce;
+    transform-origin: center bottom;
+}
+
+@mixin flash {
+    animation-name: flash;
+}
+
+@mixin headShake {
+    animation-name: headShake;
+    animation-timing-function: ease-in-out;
+}
+
+@mixin heartBeat {
+    animation-duration: 1.3s;
+    animation-name: heartBeat;
+    animation-timing-function: ease-in-out;
+}
+
+@mixin jello {
+    animation-name: jello;
+    transform-origin: center;
+}
+
+@mixin pulse {
+    animation-name: pulse;
+}
+
+@mixin rubberBand {
+    animation-name: rubberBand;
+}
+
+@mixin shakeX {
+    animation-name: shakeX;
+}
+
+@mixin shakeY {
+    animation-name: shakeY;
+}
+
+@mixin swing {
+    animation-name: swing;
+    transform-origin: top center;
+}
+
+@mixin tada {
+    animation-name: tada;
+}
+
+@mixin wobble {
+    animation-name: wobble;
+}
+// = Bauncing entrances
+@mixin bounceIn {
+    animation-duration: .75s;
+    animation-name: bounceIn;
+}
+
+@mixin bounceInDown {
+    animation-name: bounceInDown;
+}
+
+@mixin bounceInLeft {
+    animation-name: bounceInLeft;
+}
+
+@mixin bounceInRight {
+    animation-name: bounceInRight;
+}
+
+@mixin bounceInUp {
+    animation-name: bounceInUp;
+}
+// = Bouncing exits
+@mixin bounceOut {
+    animation-duration: .75s;
+    animation-name: bounceOut;
+}
+
+@mixin bounceOutDown {
+    animation-name: bounceOutDown;
+}
+
+@mixin bounceOutLeft {
+    animation-name: bounceOutLeft;
+}
+
+@mixin bounceOutRight {
+    animation-name: bounceOutRight;
+}
+
+@mixin bounceOutUp {
+    animation-name: bounceOutUp;
+}
+// == Fading entrances
+@mixin fadeIn {
+    animation-name: fadeIn;
+}
+
+@mixin fadeInDown {
+    animation-name: fadeInDown;
+}
+
+@mixin fadeInDownBig {
+    animation-name: fadeInDownBig;
+}
+
+@mixin fadeInLeft {
+    animation-name: fadeInLeft;
+}
+
+@mixin fadeInLeftBig {
+    animation-name: fadeInLeftBig;
+}
+
+@mixin fadeInRight {
+    animation-name: fadeInRight;
+}
+
+@mixin fadeInRightBig {
+    animation-name: fadeInRightBig;
+}
+
+@mixin fadeInUp {
+    animation-name: fadeInUp;
+}
+
+@mixin fadeInUpBig {
+    animation-name: fadeInUpBig;
+}
+// == Fading exits
+@mixin fadeOut {
+    animation-name: fadeOut;
+}
+
+@mixin fadeOutDown {
+    animation-name: fadeOutDown;
+}
+
+@mixin fadeOutDownBig {
+    animation-name: fadeOutDownBig;
+}
+
+@mixin fadeOutLeft {
+    animation-name: fadeOutLeft;
+}
+
+@mixin fadeOutLeftBig {
+    animation-name: fadeOutLeftBig;
+}
+
+@mixin fadeOutRight {
+    animation-name: fadeOutRight;
+}
+
+@mixin fadeOutRightBig {
+    animation-name: fadeOutRightBig;
+}
+
+@mixin fadeOutUp {
+    animation-name: fadeOutUp;
+}
+
+@mixin fadeOutUpBig {
+    animation-name: fadeOutUpBig;
+}
+// = Flippers
+@mixin flip {
+    animation-name: flip;
+    backface-visibility: visible !important;
+}
+
+@mixin flipInX {
+    animation-name: flipInX;
+    backface-visibility: visible !important;
+}
+
+@mixin flipInY {
+    animation-name: flipInY;
+    backface-visibility: visible !important;
+}
+
+@mixin flipOutX {
+    animation-name: flipOutX;
+    animation-duration: .75s;
+    backface-visibility: visible !important;
+}
+
+@mixin flipOutY {
+    animation-duration: .75s;
+    animation-name: flipOutY;
+    backface-visibility: visible !important;
+}
+// = Lightspeed
+@mixin lightSpeedIn {
+    animation-name: lightSpeedIn;
+    animation-timing-function: ease-out;
+}
+
+@mixin lightSpeedOut {
+    animation-name: lightSpeedOut;
+    animation-timing-function: ease-in;
+}
+// = Rotating entrances
+@mixin rotateIn {
+    animation-name: rotateIn;
+}
+
+@mixin rotateInDownLeft {
+    animation-name: rotateInDownLeft;
+}
+
+@mixin rotateInDownRight {
+    animation-name: rotateInDownRight;
+}
+
+@mixin rotateInUpLeft {
+    animation-name: rotateInUpLeft;
+}
+
+@mixin rotateInUpRight {
+    animation-name: rotateInUpRight;
+}
+// = Rotating exits
+@mixin rotateOut {
+    animation-name: rotateOut;
+}
+
+@mixin rotateOutDownLeft {
+    animation-name: rotateOutDownLeft;
+}
+
+@mixin rotateOutDownRight {
+    animation-name: rotateOutDownRight;
+}
+
+@mixin rotateOutUpLeft {
+    animation-name: rotateOutUpLeft;
+}
+
+@mixin rotateOutUpRight {
+    animation-name: rotateOutUpRight;
+}
+// = Sliding entrances
+@mixin slideInDown {
+    animation-name: slideInDown;
+}
+
+@mixin slideInLeft {
+    animation-name: slideInLeft;
+}
+
+@mixin slideInRight {
+    animation-name: slideInRight;
+}
+
+@mixin slideInUp {
+    animation-name: slideInUp;
+}
+// = Sliding exits
+@mixin slideOutDown {
+    animation-name: slideOutDown;
+}
+
+@mixin slideOutLeft {
+    animation-name: slideOutLeft;
+}
+
+@mixin slideOutRight {
+    animation-name: slideOutRight;
+}
+
+@mixin slideOutUp {
+    animation-name: slideOutUp;
+}
+// = Specials
+@mixin hinge {
+    animation-duration: 2s;
+    animation-name: hinge;
+}
+
+@mixin jackInTheBox {
+    animation-name: jackInTheBox;
+}
+
+@mixin rollIn {
+    animation-name: rollIn;
+}
+
+@mixin rollOut {
+    animation-name: rollOut;
+}
+
+@mixin rotate {
+    animation-name: rotate;
+}
+// == Zooming entrances
+@mixin zoomIn {
+    animation-name: zoomIn;
+}
+
+@mixin zoomInDown {
+    animation-name: zoomInDown;
+}
+
+@mixin zoomInLeft {
+    animation-name: zoomInLeft;
+}
+
+@mixin zoomInRight {
+    animation-name: zoomInRight;
+}
+
+@mixin zoomInUp {
+    animation-name: zoomInUp;
+}
+// == Zooming exits
+@mixin zoomOut {
+    animation-name: zoomOut;
+}
+
+@mixin zoomOutDown {
+    animation-name: zoomOutDown;
+}
+
+@mixin zoomOutLeft {
+    animation-name: zoomOutLeft;
+}
+
+@mixin zoomOutRight {
+    animation-name: zoomOutRight;
+}
+
+@mixin zoomOutUp {
+    animation-name: zoomOutUp;
+}

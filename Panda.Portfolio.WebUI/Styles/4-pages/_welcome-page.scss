@@ -1,0 +1,38 @@
+﻿/*
+.welcome-title {
+    font-family: AveriaSansLibre-BoldItalic;
+    color: rgb(0, 0, 0) !important;
+    font-weight: bolder;
+    text-align: center center;
+    margin-top: 30px
+}
+
+.welcome-text {
+    font-family: AveriaSansLibre-BoldItalic;
+    color: rgba(0, 0, 0, 1) !important;
+    font-weight: bold;
+    text-align: center center;
+    margin-top: 10px
+}
+*/
+.brain {
+    &::before {
+        content: "\f55b";
+        display: block;
+        font-family: "FA5 Solid" !important;
+        font-size: 5rem;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.tech {
+    &::before {
+        content: "\f085";
+        display: block;
+        font-family: "FA5 Solid" !important;
+        font-size: 5rem;
+        padding: 0;
+        margin: 0;
+    }
+}

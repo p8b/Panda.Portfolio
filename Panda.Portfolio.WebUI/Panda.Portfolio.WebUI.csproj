@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+	<TargetFramework>net7.0</TargetFramework>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<Content Include="Styles\site.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Panda.MudBlazorLib" Version="1.0.0-pre.3" />
+	<PackageReference Include="Panda.SerilogLib" Version="1.0.0-pre.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+  </ItemGroup>
+
+	<!-- Add SCSS files to dotnet watch -->
+	<ItemGroup>
+		<Watch Include="**\*.scss" />
+		<None Update="**\*.css" watch="false" />
+	</ItemGroup>
+
+	<!-- Compile SCSS files into CSS -->
+	<ItemGroup>
+		<ComponentScssFiles Include="**/*/*.scss" Exclude="node_modules/**;wwwroot/**;Styles/**" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="wwwroot\fonts\fa-brands-400.woff2" />
+	  <None Include="wwwroot\fonts\fa-regular-400.woff2" />
+	  <None Include="wwwroot\fonts\fa-solid-900.woff2" />
+	</ItemGroup>
+
+	<Target Name="CompileComponentSass" BeforeTargets="CompileGlobalSass">
+		<Message Text="Compiling Component SCSS files" Importance="high" />
+		<Exec Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(ComponentScssFiles.Identity)', `.*[/\\]_.*`))" Command="npm run sass -- --style=compressed --no-source-map %(ComponentScssFiles.Identity) %(relativedir)%(filename).css" />
+	</Target>
+
+	<Target Name="CompileGlobalSass" BeforeTargets="Compile">
+		<Message Text="Compiling global SCSS file" Importance="high" />
+		<Exec Command="npm run sass -- --style=compressed Styles:wwwroot/css" />
+	</Target>
+
+
+</Project>

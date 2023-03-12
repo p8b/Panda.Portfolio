@@ -1,0 +1,60 @@
+﻿.github {
+    font-size: 0;
+
+    &:before {
+        content: "\f09b";
+        font-family: "FA5 Brands";
+        font-size: 1.6rem;
+    }
+
+    &-lg:before {
+        @extend .github;
+        font-size: 2.3rem;
+    }
+}
+
+
+.linkedin {
+    font-size: 0;
+
+    &:before {
+        content: "\f08c";
+        font-family: "FA5 Brands";
+        font-size: 1.6rem;
+    }
+
+    &-lg:before {
+        @extend .linkedin;
+        font-size: 2.3rem;
+    }
+}
+
+.cv-file {
+    font-size: 0;
+
+    &:before {
+        content: "\f6dc";
+        font-family: "FA5 Solid";
+        font-size: 1.6rem;
+    }
+
+    &-lg:before {
+        @extend .cv-file;
+        font-size: 2.3rem;
+    }
+}
+
+.eye {
+    font-size: 0;
+
+    &:before {
+        content: "\f06e";
+        font-family: "FA5 Solid";
+        font-size: 1.6rem;
+    }
+
+    &-lg:before {
+        @extend .eye;
+        font-size: 2.3rem;
+    }
+}

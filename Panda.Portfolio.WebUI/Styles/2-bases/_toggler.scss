@@ -1,0 +1,99 @@
+﻿.toggler {
+    margin: 0;
+    padding: 0;
+
+    & div {
+        position: relative;
+        display: inline-block;
+        width: 1.5rem;
+        height: .75rem;
+        line-height: 0;
+        vertical-align: middle;
+    }
+
+    &.toggler-lg div {
+        width: 2rem;
+        height: 1rem;
+
+        & + label {
+            line-height: 0;
+            vertical-align: middle;
+        }
+    }
+
+    & div + label {
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+        padding-left: .3rem;
+        line-height: 0;
+        user-select: none;
+        vertical-align: middle;
+    }
+
+    & div:hover + label, & div + label:hover {
+        color: DarkThemeText();
+    }
+
+    body.dark-theme & div:hover + label, body.dark-theme & div + label:hover {
+        color: LightThemeText();
+    }
+
+    body.dark-theme & div + label {
+        color: DarkThemeText();
+    }
+
+    & div input {
+        display: none;
+    }
+
+    & div input:checked + span {
+        background-color: rgb(0, 152, 255) !important;
+
+        body.dark-theme & {
+            background-color: rgb(0, 103, 172);
+        }
+    }
+
+    & div input:checked + span:before {
+        transform: translateX(100%);
+    }
+
+    & span {
+        position: absolute;
+        display: inline-block;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(130, 130, 130);
+        border-radius: 2rem;
+        transition: .8s;
+
+        body.dark-theme & {
+            background-color: rgb(155, 155, 155);
+        }
+
+        &:before {
+            position: absolute;
+            display: inline-block;
+            content: "";
+            height: 100%;
+            width: 50%;
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 .3rem rgb(42, 42, 42);
+            background-color: rgb(255, 255, 255);
+            transition: .4s;
+            border-radius: 50%;
+
+            body.dark-theme & {
+                box-shadow: inset 0 0 .3rem rgb(255, 255, 255);
+                background-color: rgb(42, 42, 42);
+            }
+        }
+    }
+}

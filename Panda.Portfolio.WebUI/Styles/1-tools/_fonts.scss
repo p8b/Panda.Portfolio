@@ -1,0 +1,62 @@
+﻿@font-face {
+    font-family: "AveriaSansLibre-BoldItalic";
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src: url("/fonts/AveriaSansLibre-BoldItalic.ttf");
+    font-display: swap
+}
+
+@font-face {
+    font-family: "AveriaSansLibre-Regular";
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src: url("/fonts/AveriaSansLibre-Regular.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "AveriaSansLibre-Bold";
+    font-style: normal;
+    font-weight: 500;
+    font-display: block;
+    src: url("/fonts/AveriaSansLibre-Bold.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "FA5 Regular";
+    src: url("/fonts/fa-regular-400.woff2") format("woff2"), url("/fonts/fa-regular-400.woff") format("woff"), url("/fonts/fa-regular-400.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "FA5 Brands";
+    src: url("/fonts/fa-brands-400.woff2") format("woff2"), url("/fonts/fa-brands-400.woff") format("woff"), url("/fonts/fa-brands-400.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "FA5 Solid";
+    src: url("/fonts/fa-solid-900.woff2") format("woff2"), url("/fonts/fa-solid-900.woff") format("woff"), url("/fonts/fa-solid-900.ttf") format("truetype");
+    font-display: swap;
+}
+
+.far {
+    font-family: "FA5 Regular";
+    font-style: normal;
+    display: inline-block;
+}
+
+.fas {
+    font-family: "FA5 Solid";
+    font-style: normal;
+    display: inline-block;
+}
+
+.fab {
+    font-family: "FA5 Brands";
+    font-style: normal;
+    display: inline-block;
+}

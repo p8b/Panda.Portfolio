@@ -1,0 +1,44 @@
+﻿@using Panda.MudBlazorLib.Components.AppMenu
+@using Panda.MudBlazorLib.Model.Interfaces;
+@using Panda.MudBlazorLib.Themes;
+    using Panda.MudBlazorLib.Model.Interfaces;
+@inherits LayoutComponentBase
+
+<MudThemeProvider IsDarkMode="@AppState.Settings.IsDarkTheme" Theme="AppState.Theme"/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+<MudLayout>
+    <AppMenu LogoSrc="@LogoSrc"
+        BackgroundImageClass="@bgImage"
+        LeftSideNavBarIcon="@icon"
+        AppState="@(AppState)">
+        <TopNavBarMiddle>
+     @*       <NavLink Text="Home"
+                Href="/"
+                Icon="@Icons.Material.Filled.Home" />*@
+        </TopNavBarMiddle>
+        <TopNavBarRight>
+            <MudIconButton Icon="@Icons.Custom.Brands.GitHub"
+                Href="https://github.com/p8b"
+                Target="_blank" />
+        </TopNavBarRight>
+        <LeftSideNavBar>
+            <NavLink Text="Settings"
+                Href="/Settings"
+                Icon="@Icons.Material.Filled.Settings" />
+        </LeftSideNavBar>
+    </AppMenu>
+    <MudMainContent>
+        <MudContainer MaxWidth="@AppState.Settings.ContainerMaxWidth">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code{
+    private string LogoSrc => $"https://static.p8b.uk/public/images/P8B/Logo-{(AppState.Settings.IsDarkTheme ? "Light" : "Dark")}.png";
+    private string bgImage => $"hex-bg {(AppState.Settings.IsDarkTheme ? "hex-bg-white" : "hex-bg-dark")}";
+    private string icon => Icons.Material.Filled.HorizontalRule + (AppState.Settings.NavDrawerOpen ? Icons.Material.Filled.ArrowBackIosNew : Icons.Material.Filled.ArrowForwardIos);
+
+    [CascadingParameter] public IApp<AppSettings> AppState { get; set; } = default!;
+}

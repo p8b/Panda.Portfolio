@@ -1,0 +1,14 @@
+﻿/*@import "../0-helpers/_functions.scss";
+@import "../1-tools/_background-colors.scss";*/
+
+*::-webkit-scrollbar-track-piece {
+    background-color: white;
+}
+
+*::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: LightThemeColor(1);
+}

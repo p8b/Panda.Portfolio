@@ -1,0 +1,21 @@
+﻿a {
+    cursor: pointer;
+    color: LightThemeText();
+    text-decoration: none !important;
+
+    body.dark-theme & {
+        color: DarkThemeText();
+
+        &:hover, &:focus {
+            color: LightThemeText();
+        }
+    }
+
+    &:hover.hover-gray, &:focus.hover-gray {
+        color: rgb(128, 128, 128) !important;
+    }
+
+    &.font-0 {
+        font-size: 0;
+    }
+}

@@ -1,0 +1,30 @@
+﻿<MudHidden Breakpoint="Breakpoint.Xs">
+    <ArrowSection SectionTitle="Container Size">
+        <MudButtonGroup>
+            <IconButton IsActive="IsActive(MaxWidth.False)"  OnClick="()=>OnChange(MaxWidth.False)" Text="Dynamic" />
+            <IconButton IsActive="IsActive(MaxWidth.ExtraSmall)" OnClick="()=>OnChange(MaxWidth.ExtraSmall)"Text="Extra Small" />
+            <IconButton IsActive="IsActive(MaxWidth.Small)" OnClick="()=>OnChange(MaxWidth.Small)"Text="Small" />
+            <MudHidden Breakpoint="Breakpoint.SmAndDown">
+                <IconButton IsActive="IsActive(MaxWidth.Medium)" OnClick="()=>OnChange(MaxWidth.Medium)"Text="Medium" />
+                <MudHidden Breakpoint="Breakpoint.MdAndDown">
+                    <IconButton IsActive="IsActive(MaxWidth.Large)" OnClick="()=>OnChange(MaxWidth.Large)"Text="Large" />
+                    <MudHidden Breakpoint="Breakpoint.LgAndDown">
+                        <IconButton IsActive="IsActive(MaxWidth.ExtraLarge)" OnClick="()=>OnChange(MaxWidth.ExtraLarge)"Text="Extra Large" />
+                        <MudHidden Breakpoint="Breakpoint.XlAndDown">
+                            <IconButton IsActive="IsActive(MaxWidth.ExtraExtraLarge)" OnClick="()=>OnChange(MaxWidth.ExtraExtraLarge)"Text="Mega Large" />
+                        </MudHidden>
+                    </MudHidden>
+                </MudHidden>
+            </MudHidden>
+        </MudButtonGroup>
+    </ArrowSection>
+</MudHidden>
+@code{
+    private void OnChange(MaxWidth maxWidth)
+            => AppState.OnContainerMaxWithChange(maxWidth);
+    private bool IsActive(MaxWidth maxWidth)
+    {
+        return AppState.Settings.ContainerMaxWidth == maxWidth;
+    }
+
+}

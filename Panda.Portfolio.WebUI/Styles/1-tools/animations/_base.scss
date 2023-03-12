@@ -1,0 +1,54 @@
+// == Basic animation classes and fix on `body`.
+// ==================================================
+
+@import "_mixins.scss";
+/*
+body {
+  backface-visibility: hidden;
+}
+*/
+.animated {
+    @include animated;
+
+    &.infinite {
+        @include infinite;
+    }
+
+    &.delay-1s {
+        @include delay-1s;
+    }
+
+    &.delay-2s {
+        @include delay-2s;
+    }
+
+    &.delay-3s {
+        @include delay-3s;
+    }
+
+    &.delay-4s {
+        @include delay-4s;
+    }
+
+    &.delay-5s {
+        @include delay-5s;
+    }
+
+    &.fast {
+        @include fast;
+    }
+
+    &.faster {
+        @include faster;
+    }
+
+    &.slow {
+        @include slow;
+    }
+
+    &.slower {
+        @include slower;
+    }
+
+    @include reduced-motion;
+}

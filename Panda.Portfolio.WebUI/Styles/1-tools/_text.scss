@@ -1,0 +1,20 @@
+﻿.text-underline {
+    text-decoration-line: underline !important;
+}
+
+.remove-underline {
+    text-decoration: none !important;
+}
+
+.text-black, .text-black:hover {
+    color: LightThemeText();
+
+    body.dark-theme & {
+        color: DarkThemeText();
+    }
+}
+
+.small-text {
+    font-size: 1rem !important;
+    display:inline-block;
+}

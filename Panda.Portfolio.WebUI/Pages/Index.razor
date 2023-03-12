@@ -1,0 +1,24 @@
+﻿@page "/"
+@{AppState.PageTitle = "Home";}
+
+<MudGrid Class="mt-3">
+    <MudItem xs="12" Class="justify-content-center">
+        <img class="profile-pic shadow-all" src="images/Me.jpg" alt="me" />
+    </MudItem>
+    <MudItem xs="12" Class="text-center">
+        <MudText Typo="Typo.h4" Align="Align.Center">@DisplayMessage</MudText>
+    </MudItem>
+    <MudItem xs="12" Class="d-flex flex-wrap justify-center">
+        <div class="d-flex gap-5 ">
+            <MudLink Href="https://uk.linkedin.com/in/majidjoveini" Target="_blank" rel="noopener">
+                <MudIcon Class="linkedin-lg"/>
+            </MudLink>
+            <MudLink Href="https://github.com/p8b" Target="_blank" rel="noopener">
+                <MudIcon Class="github-lg"/>
+            </MudLink>
+            <MudLink Href="/docs/CV.pdf" Target="_blank" rel="noopener">
+                <MudIcon Class="cv-file-lg"/>
+            </MudLink>
+        </div>
+    </MudItem>
+</MudGrid>

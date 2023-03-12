@@ -1,0 +1,14 @@
+﻿/*@import "../1-tools/animations/_mixins.scss";*/
+
+
+.modal-body {
+    box-shadow: 0 0 2rem LightThemeBoxShadowColor(.58);
+
+    body.dark-theme & {
+        box-shadow: 0 0 2rem DarkThemeBoxShadowColor(.58);
+    }
+
+    @include flipInY;
+    @include animated;
+    @include faster;
+}

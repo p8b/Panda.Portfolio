@@ -1,0 +1,186 @@
+﻿/*@import "../1-tools/animations/_mixins.scss";*/
+.navbar {
+    z-index: 10;
+    // height: 5.5rem;
+}
+
+@media(min-device-width:768px) {
+    .navbar {
+        z-index: 10;
+        //   height: 6rem;
+        @include slideInDown;
+        @include animated;
+        @include faster;
+    }
+}
+
+@media(max-width:767px) {
+    .navbar-collapse {
+        position: absolute !important;
+        width: 30rem !important;
+        top: 90%;
+        z-index: 10;
+        right: 0 !important;
+        box-shadow: -0.2rem 0.6rem 1rem 0px LightThemeBoxShadow(.4);
+        //padding: 0.5rem;
+        background-color: rgba(255, 255, 255,1) !important;
+
+        &.hide {
+            display: block;
+            @include bounceOutUp;
+            @include animated;
+            @include faster;
+        }
+
+        &.show {
+            @include bounceInDown;
+            @include animated;
+            @include faster;
+        }
+
+        &:after {
+            content: " ";
+            position: absolute;
+            right: 0.9rem;
+            top: -1.2rem;
+            border-top: none;
+            border-right: 1.5rem solid transparent;
+            border-left: 1.5rem solid transparent;
+            border-bottom: 1.2rem dashed;
+        }
+
+        body.dark-theme & {
+            background-color: rgba(45, 45, 48,1) !important;
+            box-shadow: -0.5rem 0.6rem 1rem 0px DarkThemeBoxShadowColor(.4);
+        }
+    }
+}
+
+.logo-container {
+    &:focus {
+        @include bounce;
+        @include animated;
+        @include faster;
+    }
+}
+
+.Logo {
+    z-index: 100;
+    position: relative;
+    max-height: 5.5rem;
+    content: url("/public/images/Logo-Dark.png");
+
+    &.small {
+        max-height: 3rem !important;
+    }
+
+    &:hover {
+        @include flip;
+        @include animated;
+        @include slow;
+        @include delay-5s;
+    }
+
+    body.dark-theme & {
+        content: url("/public/images/Logo-Light.png");
+    }
+}
+
+.text-nav {
+    border-bottom: solid 0.5rem LightThemeColor(.20);
+    transition: 500ms border-bottom;
+    color: lightThemeColor(.75) !important;
+    font-size: 1.3rem;
+    height: 4rem;
+
+    @media(max-width:768px) {
+        & {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem !important;
+            border-bottom: solid 0.2rem LightThemeColor(.20) !important;
+        }
+    }
+
+    &:hover, &:focus, &.visited {
+        color: rgba(40, 62, 8, 0.75) !important;
+        text-decoration: none;
+        background-color: LightThemeColor(.07);
+        border-bottom: solid 0.5rem LightThemeColor(.70);
+        transition: 500ms;
+
+        body.dark-theme & {
+            background-color: DarkThemeColor(.07);
+        }
+    }
+
+    &.visited {
+        border-bottom: solid 0.5rem LightThemeColor(.80);
+        transition: 500ms;
+
+        @media(max-width:768px) {
+            & {
+                border-bottom: solid 0.2rem LightThemeColor(.80) !important;
+            }
+        }
+
+        body.dark-theme & {
+            border-bottom: solid 0.5rem DarkThemeColor(.80) !important;
+
+            @media(max-width:768px) {
+                & {
+                    border-bottom: solid 0.2rem DarkThemeColor(.80) !important;
+                }
+            }
+        }
+    }
+
+    body.dark-theme & {
+        color: DarkThemeColor(.75) !important;
+        border-bottom: solid 0.5rem DarkThemeColor(.2);
+
+        @media(max-width:768px) {
+            & {
+                border-bottom: solid 0.2rem DarkThemeColor(.20) !important;
+            }
+        }
+    }
+}
+
+.toggler-icon {
+    font-size: 3rem;
+    background-color: transparent;
+    outline: none !important;
+    border: 0 !important;
+    margin: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    color: black;
+
+    @media(min-width:768px) {
+        display: none !important;
+    }
+
+    &.show {
+        @include rotateIn;
+        @include animated;
+        @include fast;
+
+        &:before {
+            content: "\f00d";
+        }
+    }
+
+    &.hide {
+        @include bounceIn;
+        @include animated;
+        @include slow;
+
+        &:before {
+            content: "\f0c9";
+        }
+    }
+
+    body.dark-theme & {
+        color: white;
+    }
+}

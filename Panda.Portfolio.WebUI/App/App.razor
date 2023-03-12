@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Components.Routing
+@using Panda.MudBlazorLib.Model.Interfaces;
+@inherits ComponentBase
+<PageTitle>@PageTitle</PageTitle>
+<LoadingWrapper IsLoading="@Settings.IsLoading">
+    <CascadingValue Value="@this" TValue="IApp<AppSettings>">
+        <Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="@(new[]{typeof(Styles).Assembly})">
+            <Found Context="routeData">
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(AppLayout)" />
+                @*<FocusOnNavigate RouteData="@routeData" Selector="h1" />*@
+            </Found>
+            <NotFound>
+                <PageTitle>Not found</PageTitle>
+                <LayoutView Layout="@typeof(AppLayout)">
+                    <p role="alert">Sorry, there's nothing at this address.</p>
+                </LayoutView>
+            </NotFound>
+        </Router>
+    </CascadingValue>
+</LoadingWrapper>

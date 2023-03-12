@@ -1,0 +1,13 @@
+﻿
+.boarder-none {
+    border: 0;
+}
+
+.boarder-radius-none {
+    border-radius: 0;
+}
+
+.outline-none:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}

@@ -1,0 +1,31 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Cors
+@using Panda.MudBlazorLib;
+@namespace Panda.Portfolio.WebUI.App
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@*@attribute [EnableCors(ConfigureServices.CorsPolicy)]*@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <base href="~/" />
+        <component type="typeof(Fonts)" render-mode="ServerPrerendered" />
+        <component type="typeof(Styles)" render-mode="ServerPrerendered" />
+        <link href="css/site.css" as="style"rel="preload" onload="this.rel = 'stylesheet';"/>
+        <link href="Panda.Portfolio.WebUI.styles.css" as="style" rel="preload" onload="this.rel = 'stylesheet';" />
+        <link rel="preload" href="fonts/fa-brands-400.woff2" as="font" crossorigin="anonymous" />
+        <link rel="preload" href="fonts/fa-solid-900.woff2" as="font" crossorigin="anonymous" />
+        <link rel="preload" href="fonts/AveriaSansLibre-Bold.ttf" as="font" crossorigin="anonymous" />
+        <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    </head>
+    <body>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+
+        <script src="_framework/blazor.server.js"></script>
+        <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+        <script src="_content/Panda.BlazorCore/jsServices.js"></script>
+    </body>
+</html>
