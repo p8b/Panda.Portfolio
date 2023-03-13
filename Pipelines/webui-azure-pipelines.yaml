@@ -79,5 +79,4 @@ stages:
               remoteDirectory: '$(ftp-remote-directory)'
               trustSSL: true
               clean: true
-              filePatterns: '**/*'
               preservePaths: true
