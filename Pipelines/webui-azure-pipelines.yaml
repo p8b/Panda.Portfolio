@@ -47,7 +47,6 @@ stages:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
               ArtifactName: 'drop'
               publishLocation: 'Container'
-
   - stage: FtpUpload
     displayName: 'Ftp Upload'
     dependsOn: Build
@@ -59,16 +58,8 @@ stages:
         steps:
           - download: current
             artifact: drop
-          - task: CmdLine@2
-            inputs:
-              script: |
-                tree $(build.artifactstagingdirectory)
-          - task: CmdLine@2
-            inputs:
-              script: |
-                tree $(Pipeline.Workspace)/drop/
           - task: FtpUpload@2
-            displayName: 'FTP Upload'
+            displayName: 'Ftp Upload'
             inputs:
               credentialsOption: 'inputs'
               serverUrl: '$(FtpServer)'
@@ -77,7 +68,8 @@ stages:
               rootDirectory: '$(Pipeline.Workspace)/drop/'
               remoteDirectory: '$(ftp-remote-directory)'
               #cleanContents: true
-              preservePaths: true
+              #preservePaths: true
               trustSSL: true
               clean: true
               filePatterns: '**.zip'
+              customCmds: 'help COMMAND'
