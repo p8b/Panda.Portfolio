@@ -58,16 +58,6 @@ stages:
         steps:
           - download: current
             artifact: drop
-          - task: ExtractFiles@1
-            inputs:
-              archiveFilePatterns: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
-              destinationFolder: '$(Pipeline.Workspace)/drop/$(ProjectName)/'
-              cleanDestinationFolder: true
-              overwriteExistingFiles: false
-          - task: CmdLine@2
-            inputs:
-              script: |
-                tree $(Pipeline.Workspace)/drop/
           - task: FtpUpload@2
             displayName: 'Ftp Upload'
             inputs:
@@ -75,8 +65,9 @@ stages:
               serverUrl: '$(FtpServer)'
               username: '$(FtpUsername)'
               password: '$(FtpPassword)'
-              rootDirectory: '$(Pipeline.Workspace)/drop/$(ProjectName)'
+              rootDirectory: '$(Pipeline.Workspace)/drop'
               remoteDirectory: '$(ftp-remote-directory)'
               trustSSL: true
               clean: true
-              preservePaths: true
+              filePatterns: '**/$(ProjectName).zip'
+              preservePaths: false
