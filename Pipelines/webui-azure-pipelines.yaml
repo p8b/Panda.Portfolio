@@ -81,4 +81,3 @@ stages:
               trustSSL: true
               clean: true
               filePatterns: '$(ProjectName).zip'
-              customCmds: 'expand -R $(ProjectName).zip .'
