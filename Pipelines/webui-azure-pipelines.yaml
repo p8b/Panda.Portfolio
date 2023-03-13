@@ -9,6 +9,8 @@ variables:
     value: 'Panda.Portfolio.WebUI'
   - name: BuildConfiguration
     value: Release
+  - name: ftp-remote-directory
+    value: test.p8b.uk
 trigger:
   branches:
     include:
@@ -46,10 +48,18 @@ stages:
           username: '$(FPTUsername)'
           password: '$(FPTPassword)'
           rootDirectory: '$(build.artifactstagingdirectory)'
-          remoteDirectory: 'test.p8b.uk'
+          remoteDirectory: $(ftp-remote-directory)
           cleanTargetFolder: true
           preservePaths: true
           trustSSL: true
+      - task: FtpCommand@1
+        displayName: 'FTP Unzip'
+        inputs:
+          credentialsOption: 'inputs'
+          serverUrl: '$(FTPServer)'
+          username: '$(FPTUsername)'
+          password: '$(FPTPassword)'
+          commands: 'cd $(ftp-remote-directory); unzip -o -q *.zip; rm -f *.zip'
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
