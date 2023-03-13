@@ -42,22 +42,12 @@ stages:
           publishWebProjects: false
           projects: '**/$(ProjectName).csproj'
           arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-          
-      - task: CmdLine@2
-        inputs:
-          script: |
-            tree $(build.artifactstagingdirectory)
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
           ArtifactName: 'drop'
           publishLocation: 'Container'
-          
-      - task: CmdLine@2
-        inputs:
-          script: |
-            tree $(build.artifactstagingdirectory)
   - stage: FtpUpload
     displayName: 'Ftp Upload'
     dependsOn: Build
@@ -68,14 +58,8 @@ stages:
         name: Azure Pipelines
       steps:
       - checkout: self
-      - task: CmdLine@2
-        inputs:
-          script: |
-            tree $(build.artifactstagingdirectory)
-      - task: CmdLine@2
-        inputs:
-          script: |
-            tree $(Pipeline.Workspace)
+      - download: current
+        artifact: drop
       - task: FtpUpload@2
         displayName: 'FTP Upload'
         inputs:
