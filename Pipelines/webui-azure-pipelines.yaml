@@ -42,6 +42,12 @@ stages:
           publishWebProjects: false
           projects: '**/$(ProjectName).csproj'
           arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+      - task: PowerShell@2
+        displayName: Unzip Published Files
+        inputs:
+          targetType: 'inline'
+          script: |
+            Expand-Archive -Path "$(build.artifactstagingdirectory)\$(ProjectName).zip" -DestinationPath "$(build.artifactstagingdirectory)"
       - task: FtpUpload@2
         displayName: 'FTP Upload'
         inputs:
@@ -54,19 +60,6 @@ stages:
           cleanTargetFolder: true
           preservePaths: true
           trustSSL: true
-      - task: FtpUpload@2
-        displayName: 'FTP Upload'
-        inputs:
-          credentialsOption: 'inputs'
-          serverUrl: '$(FtpServer)'
-          username: '$(FtpUsername)'
-          password: '$(FtpPassword)'
-          rootDirectory: '$(build.artifactstagingdirectory)'
-          remoteDirectory: '$(ftp-remote-directory)'
-          cleanTargetFolder: true
-          preservePaths: true
-          trustSSL: true
-          customCmds: 'cd $(ftp-remote-directory); unzip -o -q *.zip; rm -f *.zip'
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
