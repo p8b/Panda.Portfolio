@@ -10,8 +10,6 @@ variables:
     value: Release
   - name: ftp-remote-directory
     value: 'test.p8b.uk'
-  - name: System.Debug
-    value: true
 
 trigger:
   branches:
@@ -73,6 +71,6 @@ stages:
                 rootDirectory: '$(Pipeline.Workspace)/drop'
                 remoteDirectory: '$(ftp-remote-directory)'
                 trustSSL: true
-                cleanContents: true
+                clean: true
                 filePatterns: '**/$(ProjectName).zip'
                 preservePaths: false
