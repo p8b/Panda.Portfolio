@@ -42,10 +42,6 @@ stages:
           publishWebProjects: false
           projects: '**/$(ProjectName).csproj'
           arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-      - task: CmdLine@2
-        inputs:
-          script: |
-            echo $(build.artifactstagingdirectory)
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
@@ -62,6 +58,10 @@ stages:
         name: Azure Pipelines
       steps:
       - checkout: self
+      - task: CmdLine@2
+        inputs:
+          script: |
+            echo $(build.artifactstagingdirectory)
       - task: FtpUpload@2
         displayName: 'FTP Upload'
         inputs:
@@ -69,7 +69,7 @@ stages:
           serverUrl: '$(FtpServer)'
           username: '$(FtpUsername)'
           password: '$(FtpPassword)'
-          rootDirectory: '$(Pipeline.Workspace)\**\'
+          rootDirectory: '$(Pipeline.Workspace)\a'
           remoteDirectory: '$(ftp-remote-directory)'
           cleanContents: true
           preservePaths: true
