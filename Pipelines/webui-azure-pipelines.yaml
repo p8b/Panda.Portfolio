@@ -54,17 +54,7 @@ stages:
           cleanTargetFolder: true
           preservePaths: true
           trustSSL: true
-      - task: SSH@0
-        displayName: 'Extract ZIP file on remote FTP server'
-        inputs:
-          sshEndpoint: '$(FTPServer)'
-          username: '$(FTPUsername)'
-          password: '$(FTPPassword)'
-          runOptions: 'inline'
-          inline: |
-            cd $(ftp-remote-directory)
-            unzip -o -q *.zip
-            rm -f *.zip
+          customCmds: 'cd $(ftpRemoteDirectory); unzip -o -q *.zip; rm -f *.zip'
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
