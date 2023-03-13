@@ -60,8 +60,8 @@ stages:
             artifact: drop
           - task: ExtractFiles@1
             inputs:
-              archiveFilePatterns: '**/$(ProjectName).zip'
-              destinationFolder: '**/drop/$(ProjectName)/'
+              archiveFilePatterns: 'drop/$(ProjectName).zip'
+              destinationFolder: 'drop/$(ProjectName)/'
               cleanDestinationFolder: true
               overwriteExistingFiles: false
           - task: CmdLine@2
