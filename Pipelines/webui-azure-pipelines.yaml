@@ -32,12 +32,6 @@ stages:
           projects: '**/$(ProjectName).csproj'
           feedRestore: '$(FeedId)'
       # - task: DotNetCoreCLI@2
-      #   displayName: Build Project
-      #   inputs:
-      #     command: 'build'
-      #     projects: '**/$(ProjectName).csproj'
-      #     arguments: --configuration $(BuildConfiguration)
-      # - task: DotNetCoreCLI@2
       #   displayName: Test Project
       #   inputs:
       #     command: test
@@ -56,3 +50,15 @@ stages:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
           ArtifactName: 'drop'
           publishLocation: 'Container'
+      - task: FtpUpload@2
+        displayName: 'FTP Upload'
+        inputs:
+          credentialsOption: 'inputs'
+          serverUrl: '$(FTPServer)'
+          username: '$(FPTUsername)'
+          password: '$(FPTPassword)'
+          rootDirectory: '$(Build.ArtifactStagingDirectory)/publish'
+          remoteDirectory: 'test.p8b.uk'
+          cleanTargetFolder: true
+          preservePaths: true
+          trustSSL: true
