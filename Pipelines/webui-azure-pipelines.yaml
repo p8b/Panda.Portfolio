@@ -79,5 +79,5 @@ stages:
               cleanContents: true
               preservePaths: true
               trustSSL: true
-              # clean: true
+              clean: true
               # customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
