@@ -73,7 +73,7 @@ stages:
               password: '$(FtpPassword)'
               rootDirectory: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
               remoteDirectory: '$(ftp-remote-directory)'
-              # cleanContents: true
+              cleanContents: true
               preservePaths: true
               trustSSL: true
               # clean: true
