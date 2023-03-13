@@ -1,4 +1,10 @@
 name: 'Panda.Portfolio.WebUI'
+resources:
+  repositories:
+  - repository: FtpCommand
+    type: git
+    name: robert-waggott/azure-pipelines-tasks
+    ref: FtpCommand_1.0
 variables:
   - group: 'GitHub Details'
   - group: 'NuGet Feed'
@@ -60,6 +66,7 @@ stages:
           username: '$(FPTUsername)'
           password: '$(FPTPassword)'
           commands: 'cd $(ftp-remote-directory); unzip -o -q *.zip; rm -f *.zip'
+        condition: always()
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
