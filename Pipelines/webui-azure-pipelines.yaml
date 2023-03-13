@@ -1,10 +1,4 @@
 name: 'Panda.Portfolio.WebUI'
-resources:
-  repositories:
-  - repository: FtpCommand
-    type: git
-    name: robert-waggott/azure-pipelines-tasks
-    ref: FtpCommand_1.0
 variables:
   - group: 'GitHub Details'
   - group: 'NuGet Feed'
