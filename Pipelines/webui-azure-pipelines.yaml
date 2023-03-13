@@ -10,7 +10,7 @@ variables:
   - name: BuildConfiguration
     value: Release
   - name: ftp-remote-directory
-    value: 'test.p8b.uk'
+    value: 'test.p8b.uk/PublishFiles'
 
 trigger:
   branches:
@@ -27,6 +27,8 @@ stages:
       displayName: Build App
       pool:
         name: Azure Pipelines
+      workspace:
+        clean: outputs
       steps:
       - checkout: self
       - task: DotNetCoreCLI@2
@@ -41,13 +43,14 @@ stages:
           command: 'publish'
           publishWebProjects: false
           projects: '**/$(ProjectName).csproj'
-          arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+          arguments: '--configuration $(BuildConfiguration) --output $(Pipeline.Workspace)/$(BuildConfiguration)'
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          PathtoPublish: '$(Pipeline.Workspace)'
           ArtifactName: 'drop'
           publishLocation: 'Container'
+          
   - stage: FtpUpload
     displayName: 'Ftp Upload'
     dependsOn: Build
@@ -58,12 +61,6 @@ stages:
         name: Azure Pipelines
       steps:
       - checkout: self
-      - download: current
-        artifact: drop
-      - task: CmdLine@2
-        inputs:
-          script: |
-            tree $(build.artifactstagingdirectory)
       - task: FtpUpload@2
         displayName: 'FTP Upload'
         inputs:
@@ -71,10 +68,10 @@ stages:
           serverUrl: '$(FtpServer)'
           username: '$(FtpUsername)'
           password: '$(FtpPassword)'
-          rootDirectory: '$(build.artifactstagingdirectory)'
+          rootDirectory: '$(Pipeline.Workspace)/$(BuildConfiguration)'
           remoteDirectory: '$(ftp-remote-directory)'
-          # cleanContents: true
+          cleanContents: true
           preservePaths: true
           trustSSL: true
-          # clean: true
+          clean: true
           # customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
