@@ -54,6 +54,7 @@ stages:
           cleanContents: true
           preservePaths: true
           trustSSL: true
+          customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
