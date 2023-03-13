@@ -31,12 +31,12 @@ stages:
           command: restore
           projects: '**/$(ProjectName).csproj'
           feedRestore: '$(FeedId)'
-      - task: DotNetCoreCLI@2
-        displayName: Build Project
-        inputs:
-          command: 'build'
-          projects: '**/$(ProjectName).csproj'
-          arguments: --configuration $(BuildConfiguration)
+      # - task: DotNetCoreCLI@2
+      #   displayName: Build Project
+      #   inputs:
+      #     command: 'build'
+      #     projects: '**/$(ProjectName).csproj'
+      #     arguments: --configuration $(BuildConfiguration)
       # - task: DotNetCoreCLI@2
       #   displayName: Test Project
       #   inputs:
