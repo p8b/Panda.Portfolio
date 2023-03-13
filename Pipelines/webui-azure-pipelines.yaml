@@ -1,4 +1,3 @@
-name: 'Panda.Portfolio.WebUI'
 variables:
   - group: 'GitHub Details'
   - group: 'NuGet Feed'
@@ -10,68 +9,72 @@ variables:
   - name: BuildConfiguration
     value: Release
   - name: ftp-remote-directory
-    value: 'test.p8b.uk/PublishFiles'
+    value: 'test.p8b.uk'
 
 trigger:
   branches:
     include:
-    - master
+      - master
   paths:
     include:
-    - p8b/Panda.Portfolio.WebUI/Panda.Portfolio.WebUI.csproj
+      - p8b/Panda.Portfolio.WebUI/Panda.Portfolio.WebUI.csproj
 
 stages:
   - stage: Build
     jobs:
-    - job: BuildJob
-      displayName: Build App
-      pool:
-        name: Azure Pipelines
-      workspace:
-        clean: outputs
-      steps:
-      - checkout: self
-      - task: DotNetCoreCLI@2
-        displayName: Restore Project
-        inputs:
-          command: restore
-          projects: '**/$(ProjectName).csproj'
-          feedRestore: '$(FeedId)'
-      - task: DotNetCoreCLI@2
-        displayName: Publish Project
-        inputs:
-          command: 'publish'
-          publishWebProjects: false
-          projects: '**/$(ProjectName).csproj'
-          arguments: '--configuration $(BuildConfiguration) --output $(Pipeline.Workspace)/$(BuildConfiguration)'
-      - task: PublishBuildArtifacts@1
-        displayName: Publish drop
-        inputs:
-          PathtoPublish: '$(Pipeline.Workspace)'
-          ArtifactName: 'drop'
-          publishLocation: 'Container'
-          
+      - job: BuildJob
+        displayName: Build App
+        pool:
+          name: Azure Pipelines
+        steps:
+          - checkout: self
+          - task: DotNetCoreCLI@2
+            displayName: Restore Project
+            inputs:
+              command: restore
+              projects: '**/$(ProjectName).csproj'
+              feedRestore: '$(FeedId)'
+          - task: DotNetCoreCLI@2
+            displayName: Publish Project
+            inputs:
+              command: 'publish'
+              publishWebProjects: false
+              projects: '**/$(ProjectName).csproj'
+              arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+          - task: PublishBuildArtifacts@1
+            displayName: Publish drop
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+
   - stage: FtpUpload
     displayName: 'Ftp Upload'
     dependsOn: Build
     jobs:
-    - job: FtpUploadJob
-      displayName: Publish To Mocha Host ftp Server
-      pool:
-        name: Azure Pipelines
-      steps:
-      - checkout: self
-      - task: FtpUpload@2
-        displayName: 'FTP Upload'
-        inputs:
-          credentialsOption: 'inputs'
-          serverUrl: '$(FtpServer)'
-          username: '$(FtpUsername)'
-          password: '$(FtpPassword)'
-          rootDirectory: '$(Pipeline.Workspace)/$(BuildConfiguration)'
-          remoteDirectory: '$(ftp-remote-directory)'
-          cleanContents: true
-          preservePaths: true
-          trustSSL: true
-          clean: true
-          # customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
+      - job: FtpUploadJob
+        displayName: Publish To Mocha Host ftp Server
+        pool:
+          name: Azure Pipelines
+        steps:
+          - checkout: self
+          - download: current
+            artifact: drop
+          - task: CmdLine@2
+            inputs:
+              script: |
+                tree $(build.artifactstagingdirectory)
+          - task: FtpUpload@2
+            displayName: 'FTP Upload'
+            inputs:
+              credentialsOption: 'inputs'
+              serverUrl: '$(FtpServer)'
+              username: '$(FtpUsername)'
+              password: '$(FtpPassword)'
+              rootDirectory: '$(build.artifactstagingdirectory)'
+              remoteDirectory: '$(ftp-remote-directory)'
+              # cleanContents: true
+              preservePaths: true
+              trustSSL: true
+              # clean: true
+              # customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
