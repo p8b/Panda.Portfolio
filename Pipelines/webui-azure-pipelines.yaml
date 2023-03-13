@@ -54,7 +54,7 @@ stages:
           cleanTargetFolder: true
           preservePaths: true
           trustSSL: true
-          customCmds: 'cd $(ftpRemoteDirectory); unzip -o -q *.zip; rm -f *.zip'
+          #customCmds: 'cd $(ftpRemoteDirectory); unzip -o -q *.zip; rm -f *.zip'
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
