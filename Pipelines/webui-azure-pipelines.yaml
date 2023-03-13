@@ -11,6 +11,7 @@ variables:
     value: Release
   - name: ftp-remote-directory
     value: test.p8b.uk
+
 trigger:
   branches:
     include:
@@ -18,6 +19,7 @@ trigger:
   paths:
     include:
     - p8b/Panda.Portfolio.WebUI/Panda.Portfolio.WebUI.csproj
+
 stages:
   - stage: Build
     jobs:
@@ -45,22 +47,24 @@ stages:
         inputs:
           credentialsOption: 'inputs'
           serverUrl: '$(FTPServer)'
-          username: '$(FPTUsername)'
-          password: '$(FPTPassword)'
+          username: '$(FTPUsername)'
+          password: '$(FTPPassword)'
           rootDirectory: '$(build.artifactstagingdirectory)'
           remoteDirectory: $(ftp-remote-directory)
           cleanTargetFolder: true
           preservePaths: true
           trustSSL: true
-      - task: FtpCommand@1
-        displayName: 'FTP Unzip'
+      - task: SSH@0
+        displayName: 'Extract ZIP file on remote FTP server'
         inputs:
-          credentialsOption: 'inputs'
-          serverUrl: '$(FTPServer)'
-          username: '$(FPTUsername)'
-          password: '$(FPTPassword)'
-          commands: 'cd $(ftp-remote-directory); unzip -o -q *.zip; rm -f *.zip'
-        condition: always()
+          sshEndpoint: '$(FTPServer)'
+          username: '$(FTPUsername)'
+          password: '$(FTPPassword)'
+          runOptions: 'inline'
+          inline: |
+            cd $(ftp-remote-directory)
+            unzip -o -q *.zip
+            rm -f *.zip
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
