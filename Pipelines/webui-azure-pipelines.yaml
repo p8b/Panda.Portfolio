@@ -60,6 +60,10 @@ stages:
       - checkout: self
       - download: current
         artifact: drop
+      - task: CmdLine@2
+        inputs:
+          script: |
+            tree $(build.artifactstagingdirectory)
       - task: FtpUpload@2
         displayName: 'FTP Upload'
         inputs:
@@ -69,7 +73,7 @@ stages:
           password: '$(FtpPassword)'
           rootDirectory: '$(build.artifactstagingdirectory)'
           remoteDirectory: '$(ftp-remote-directory)'
-          cleanContents: true
+          # cleanContents: true
           preservePaths: true
           trustSSL: true
           # clean: true
