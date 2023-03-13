@@ -46,9 +46,9 @@ stages:
         displayName: 'FTP Upload'
         inputs:
           credentialsOption: 'inputs'
-          serverUrl: '$(FTPServer)'
-          username: '$(FPTUsername)'
-          password: '$(FPTPassword)'
+          serverUrl: '$(FtpServer)'
+          username: '$(FtpUsername)'
+          password: '$(FtpPassword)'
           rootDirectory: '$(build.artifactstagingdirectory)'
           remoteDirectory: '$(ftp-remote-directory)'
           cleanTargetFolder: true
