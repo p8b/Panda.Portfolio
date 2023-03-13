@@ -76,8 +76,9 @@ stages:
               password: '$(FtpPassword)'
               rootDirectory: '$(Pipeline.Workspace)/drop/'
               remoteDirectory: '$(ftp-remote-directory)'
-              cleanContents: true
+              #cleanContents: true
               preservePaths: true
               trustSSL: true
               clean: true
-              # customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
+              filePatterns: '$(ProjectName).zip'
+              customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
