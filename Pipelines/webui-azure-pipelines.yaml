@@ -72,4 +72,4 @@ stages:
               trustSSL: true
               clean: true
               filePatterns: '**.zip'
-              customCmds: 'help COMMAND'
+              customCmds: 'ftp help'
