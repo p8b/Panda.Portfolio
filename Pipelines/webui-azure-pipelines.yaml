@@ -10,7 +10,7 @@ variables:
   - name: BuildConfiguration
     value: Release
   - name: ftp-remote-directory
-    value: 'test.p8b.uk/PublishFiles'
+    value: 'test.p8b.uk'
 
 trigger:
   branches:
@@ -72,5 +72,5 @@ stages:
           cleanContents: true
           preservePaths: true
           trustSSL: true
-          clean: true
+          # clean: true
           # customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
