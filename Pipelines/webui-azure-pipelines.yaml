@@ -1,0 +1,58 @@
+name: 'Panda.Portfolio.WebUI'
+variables:
+  - group: 'GitHub Details'
+  - group: 'NuGet Feed'
+  - group: 'FTP Details'
+  - name: ProjectName
+    value: 'Panda.Portfolio.WebUI'
+  - name: ProjectDisplayName
+    value: 'Panda.Portfolio.WebUI'
+  - name: BuildConfiguration
+    value: Release
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - p8b/Panda.Portfolio.WebUI/Panda.Portfolio.WebUI.csproj
+stages:
+  - stage: Build
+    jobs:
+    - job: Job
+      displayName: Build Package
+      pool:
+        name: Azure Pipelines
+      steps:
+      - checkout: self
+      - task: DotNetCoreCLI@2
+        displayName: Restore Project
+        inputs:
+          command: restore
+          projects: '**/$(ProjectName).csproj'
+          feedRestore: '$(FeedId)'
+      - task: DotNetCoreCLI@2
+        displayName: Build Project
+        inputs:
+          command: 'build'
+          projects: '**/$(ProjectName).csproj'
+          arguments: --configuration $(BuildConfiguration)
+      # - task: DotNetCoreCLI@2
+      #   displayName: Test Project
+      #   inputs:
+      #     command: test
+      #     projects: '**/*[Tt]ests/*.csproj'
+      #     arguments: --configuration $(BuildConfiguration)
+      - task: DotNetCoreCLI@2
+        displayName: Publish Project
+        inputs:
+          command: 'publish'
+          publishWebProjects: false
+          projects: '**/$(ProjectName).csproj'
+          arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+      - task: PublishBuildArtifacts@1
+        displayName: Publish drop
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'

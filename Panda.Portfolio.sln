@@ -5,6 +5,11 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panda.Portfolio.WebUI", "Panda.Portfolio.WebUI\Panda.Portfolio.WebUI.csproj", "{0FBA264E-9294-4E45-9AC0-5180CB44FB5F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AF364591-E3C1-45E6-A14F-EF763481A51B}"
+	ProjectSection(SolutionItems) = preProject
+		Pipelines\webui-azure-pipelines.yaml = Pipelines\webui-azure-pipelines.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
