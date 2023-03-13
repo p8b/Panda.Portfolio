@@ -63,7 +63,7 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                Expand-Archive -Path "$(Pipeline.Workspace)/drop/$(ProjectName).zip" -DestinationPath "$(Pipeline.Workspace)/drop/"
+                Expand-Archive -Path "$(Pipeline.Workspace)/drop/$(ProjectName).zip" -DestinationPath "$(Pipeline.Workspace)/drop/$(ProjectName)"
           - task: FtpUpload@2
             displayName: 'Ftp Upload'
             inputs:
@@ -75,6 +75,5 @@ stages:
               remoteDirectory: '$(ftp-remote-directory)'
               trustSSL: true
               clean: true
-              filePatterns: '**/*'
+              filePatterns: '**/drop/$(ProjectName)/*'
               preservePaths: true
-              customCmds: 'quote SITE chmod 755 *'
