@@ -71,8 +71,8 @@ stages:
               serverUrl: '$(FtpServer)'
               username: '$(FtpUsername)'
               password: '$(FtpPassword)'
-              rootDirectory: '$(Pipeline.Workspace)'
-              remoteDirectory: '$(ftp-remote-directory)/drop'
+              rootDirectory: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
+              remoteDirectory: '$(ftp-remote-directory)'
               # cleanContents: true
               preservePaths: true
               trustSSL: true
