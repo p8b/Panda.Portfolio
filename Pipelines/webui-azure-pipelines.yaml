@@ -23,8 +23,8 @@ trigger:
 stages:
   - stage: Build
     jobs:
-    - job: Job
-      displayName: Publish To Mocha Host ftp Server
+    - job: BuildJob
+      displayName: Build App
       pool:
         name: Azure Pipelines
       steps:
@@ -42,6 +42,22 @@ stages:
           publishWebProjects: false
           projects: '**/$(ProjectName).csproj'
           arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+      - task: PublishBuildArtifacts@1
+        displayName: Publish drop
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'
+  - stage: FtpUpload
+    displayName: 'Ftp Upload'
+    dependsOn: Build
+    jobs:
+    - job: FtpUploadJob
+      displayName: Publish To Mocha Host ftp Server
+      pool:
+        name: Azure Pipelines
+      steps:
+      - checkout: self
       - task: FtpUpload@2
         displayName: 'FTP Upload'
         inputs:
@@ -55,9 +71,3 @@ stages:
           preservePaths: true
           trustSSL: true
           customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
-      - task: PublishBuildArtifacts@1
-        displayName: Publish drop
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-          ArtifactName: 'drop'
-          publishLocation: 'Container'
