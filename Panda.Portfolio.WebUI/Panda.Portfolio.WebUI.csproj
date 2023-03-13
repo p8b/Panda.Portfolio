@@ -35,12 +35,13 @@
 	  <None Include="wwwroot\fonts\fa-solid-900.woff2" />
 	</ItemGroup>
 
-	<Target Name="CompileComponentSass" BeforeTargets="CompileGlobalSass">
+	<Target Name="CompileComponentSass" BeforeTargets="CompileGlobalSass" Condition=" '$(Configuration)' == 'Debug' ">
 		<Message Text="Compiling Component SCSS files" Importance="high" />
-		<Exec Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(ComponentScssFiles.Identity)', `.*[/\\]_.*`))" Command="npm run sass -- --style=compressed --no-source-map %(ComponentScssFiles.Identity) %(relativedir)%(filename).css" />
+		<Exec Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(ComponentScssFiles.Identity)', `.*[/\\]_.*`))"
+			  Command="npm run sass -- --style=compressed --no-source-map %(ComponentScssFiles.Identity) %(relativedir)%(filename).css" />
 	</Target>
 
-	<Target Name="CompileGlobalSass" BeforeTargets="Compile">
+	<Target Name="CompileGlobalSass" BeforeTargets="Compile" Condition=" '$(Configuration)' == 'Debug' ">
 		<Message Text="Compiling global SCSS file" Importance="high" />
 		<Exec Command="npm run sass -- --style=compressed Styles:wwwroot/css" />
 	</Target>
