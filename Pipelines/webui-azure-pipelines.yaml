@@ -72,6 +72,10 @@ stages:
         inputs:
           script: |
             tree $(build.artifactstagingdirectory)
+      - task: CmdLine@2
+        inputs:
+          script: |
+            tree $(Pipeline.Workspace)
       - task: FtpUpload@2
         displayName: 'FTP Upload'
         inputs:
