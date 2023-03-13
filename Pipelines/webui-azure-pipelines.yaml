@@ -81,4 +81,4 @@ stages:
               trustSSL: true
               clean: true
               filePatterns: '$(ProjectName).zip'
-              customCmds: 'unzip -o $(ProjectName).zip -d "!"'
+              customCmds: 'unzip -o $(ProjectName).zip'
