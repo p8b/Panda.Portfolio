@@ -20,7 +20,7 @@ stages:
   - stage: Build
     jobs:
     - job: Job
-      displayName: Build Package
+      displayName: Publish To Mocha Host ftp Server
       pool:
         name: Azure Pipelines
       steps:
@@ -31,12 +31,6 @@ stages:
           command: restore
           projects: '**/$(ProjectName).csproj'
           feedRestore: '$(FeedId)'
-      # - task: DotNetCoreCLI@2
-      #   displayName: Test Project
-      #   inputs:
-      #     command: test
-      #     projects: '**/*[Tt]ests/*.csproj'
-      #     arguments: --configuration $(BuildConfiguration)
       - task: DotNetCoreCLI@2
         displayName: Publish Project
         inputs:
@@ -44,12 +38,6 @@ stages:
           publishWebProjects: false
           projects: '**/$(ProjectName).csproj'
           arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-      - task: PublishBuildArtifacts@1
-        displayName: Publish drop
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-          ArtifactName: 'drop'
-          publishLocation: 'Container'
       - task: FtpUpload@2
         displayName: 'FTP Upload'
         inputs:
@@ -57,8 +45,14 @@ stages:
           serverUrl: '$(FTPServer)'
           username: '$(FPTUsername)'
           password: '$(FPTPassword)'
-          rootDirectory: '$(Build.ArtifactStagingDirectory)/publish'
-          remoteDirectory: 'test.p8b.uk'
+          rootDirectory: '$(build.artifactstagingdirectory)'
+          remoteDirectory: '$(ftp-remote-directory)'
           cleanTargetFolder: true
           preservePaths: true
           trustSSL: true
+      - task: PublishBuildArtifacts@1
+        displayName: Publish drop
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'
