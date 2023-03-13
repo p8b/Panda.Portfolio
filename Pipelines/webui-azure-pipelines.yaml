@@ -10,6 +10,8 @@ variables:
     value: Release
   - name: ftp-remote-directory
     value: 'test.p8b.uk'
+  - name: System.Debug
+    value: true
 
 trigger:
   branches:
