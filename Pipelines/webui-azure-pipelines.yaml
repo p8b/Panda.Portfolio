@@ -51,7 +51,7 @@ stages:
           password: '$(FtpPassword)'
           rootDirectory: '$(build.artifactstagingdirectory)'
           remoteDirectory: '$(ftp-remote-directory)'
-          cleanTargetFolder: true
+          cleanContents: true
           preservePaths: true
           trustSSL: true
       - task: PublishBuildArtifacts@1
