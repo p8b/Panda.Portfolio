@@ -63,7 +63,7 @@ stages:
           - task: CmdLine@2
             inputs:
               script: |
-                tree $(build.artifactstagingdirectory)
+                tree $(Pipeline.Workspace)
           - task: FtpUpload@2
             displayName: 'FTP Upload'
             inputs:
@@ -71,7 +71,7 @@ stages:
               serverUrl: '$(FtpServer)'
               username: '$(FtpUsername)'
               password: '$(FtpPassword)'
-              rootDirectory: '$(build.artifactstagingdirectory)'
+              rootDirectory: '$(Pipeline.Workspace)'
               remoteDirectory: '$(ftp-remote-directory)'
               # cleanContents: true
               preservePaths: true
