@@ -46,7 +46,7 @@ stages:
           username: '$(FPTUsername)'
           password: '$(FPTPassword)'
           rootDirectory: '$(build.artifactstagingdirectory)'
-          remoteDirectory: '$(ftp-remote-directory)'
+          remoteDirectory: 'test.p8b.uk'
           cleanTargetFolder: true
           preservePaths: true
           trustSSL: true
