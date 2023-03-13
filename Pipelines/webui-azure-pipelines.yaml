@@ -58,6 +58,12 @@ stages:
         steps:
           - download: current
             artifact: drop
+          - task: PowerShell@2
+            displayName: 'Unzip Drop'
+            inputs:
+              targetType: 'inline'
+              script: |
+                Expand-Archive -Path "$(Pipeline.Workspace)/drop/$(ProjectName).zip" -DestinationPath "$(Pipeline.Workspace)/drop/"
           - task: FtpUpload@2
             displayName: 'Ftp Upload'
             inputs:
@@ -65,11 +71,10 @@ stages:
               serverUrl: '$(FtpServer)'
               username: '$(FtpUsername)'
               password: '$(FtpPassword)'
-              rootDirectory: '$(Pipeline.Workspace)/drop/'
+              rootDirectory: '$(Pipeline.Workspace)/drop/$(ProjectName)'
               remoteDirectory: '$(ftp-remote-directory)'
-              #cleanContents: true
-              #preservePaths: true
               trustSSL: true
               clean: true
-              filePatterns: '**.zip'
-              customCmds: 'ftp help'
+              filePatterns: '**/*'
+              preservePaths: true
+              customCmds: 'quote SITE chmod 755 *'
