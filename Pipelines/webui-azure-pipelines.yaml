@@ -9,7 +9,7 @@ variables:
   - name: BuildConfiguration
     value: Release
   - name: ftp-remote-directory
-    value: 'test.p8b.uk'
+    value: 'test.p8b.uk/PublishFiles'
 
 trigger:
   branches:
@@ -57,9 +57,12 @@ stages:
         pool:
           name: Azure Pipelines
         steps:
-          - checkout: self
           - download: current
             artifact: drop
+          - task: CmdLine@2
+            inputs:
+              script: |
+                tree $(build.artifactstagingdirectory)
           - task: CmdLine@2
             inputs:
               script: |
@@ -71,7 +74,7 @@ stages:
               serverUrl: '$(FtpServer)'
               username: '$(FtpUsername)'
               password: '$(FtpPassword)'
-              rootDirectory: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
+              rootDirectory: '$(Pipeline.Workspace)/**/$(ProjectName).zip'
               remoteDirectory: '$(ftp-remote-directory)'
               cleanContents: true
               preservePaths: true
