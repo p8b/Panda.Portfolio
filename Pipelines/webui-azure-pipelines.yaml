@@ -10,7 +10,7 @@ variables:
   - name: BuildConfiguration
     value: Release
   - name: ftp-remote-directory
-    value: 'test.p8b.uk'
+    value: 'test.p8b.uk/PublishFiles'
 
 trigger:
   branches:
@@ -42,12 +42,6 @@ stages:
           publishWebProjects: false
           projects: '**/$(ProjectName).csproj'
           arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-      - task: PowerShell@2
-        displayName: Unzip Published Files
-        inputs:
-          targetType: 'inline'
-          script: |
-            Expand-Archive -Path "$(build.artifactstagingdirectory)\$(ProjectName).zip" -DestinationPath "$(build.artifactstagingdirectory)"
       - task: FtpUpload@2
         displayName: 'FTP Upload'
         inputs:
