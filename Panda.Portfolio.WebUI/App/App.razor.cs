@@ -56,16 +56,18 @@ public partial class App : ComponentBase, IApp<AppSettings>
     }
 
     [JSInvokable]
-    public void FullPageLoaded(string readyState)
+    public async Task FullPageLoaded(string readyState)
     {
         if (Settings.IsLoading && readyState.Equals("complete", StringComparison.OrdinalIgnoreCase))
         {
             Settings.IsLoading = false;
+            await Storage.SetAsync(nameof(AppSettings), Settings);
             StateHasChanged();
         }
         else if (!Settings.IsLoading && !readyState.Equals("complete", StringComparison.OrdinalIgnoreCase))
         {
             Settings.IsLoading = true;
+            await Storage.SetAsync(nameof(AppSettings), Settings);
             StateHasChanged();
         }
     }
