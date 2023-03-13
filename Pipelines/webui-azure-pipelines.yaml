@@ -53,23 +53,26 @@ stages:
     displayName: 'Ftp Upload'
     dependsOn: Build
     jobs:
-      - job: FtpUploadJob
-        displayName: Publish To Mocha Host ftp Server
-        pool:
-          name: Azure Pipelines
-        steps:
-          - download: current
-            artifact: drop
-          - task: FtpUpload@2
-            displayName: 'Ftp Upload'
-            inputs:
-              credentialsOption: 'inputs'
-              serverUrl: '$(FtpServer)'
-              username: '$(FtpUsername)'
-              password: '$(FtpPassword)'
-              rootDirectory: '$(Pipeline.Workspace)/drop'
-              remoteDirectory: '$(ftp-remote-directory)'
-              trustSSL: true
-              clean: true
-              filePatterns: '**/$(ProjectName).zip'
-              preservePaths: false
+    - deployment: FtpUploadJob
+      displayName: Publish To Mocha Host ftp Server
+      environment:
+        name: 'Production'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - download: current
+              artifact: drop
+            - task: FtpUpload@2
+              displayName: 'Ftp Upload'
+              inputs:
+                credentialsOption: 'inputs'
+                serverUrl: '$(FtpServer)'
+                username: '$(FtpUsername)'
+                password: '$(FtpPassword)'
+                rootDirectory: '$(Pipeline.Workspace)/drop'
+                remoteDirectory: '$(ftp-remote-directory)'
+                trustSSL: true
+                cleanContents: true
+                filePatterns: '**/$(ProjectName).zip'
+                preservePaths: false
