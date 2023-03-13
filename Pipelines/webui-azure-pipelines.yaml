@@ -65,9 +65,10 @@ stages:
           serverUrl: '$(FtpServer)'
           username: '$(FtpUsername)'
           password: '$(FtpPassword)'
-          rootDirectory: '$(build.artifactstagingdirectory)'
+          rootDirectory: '$(Pipeline.Workspace)\**\$(ProjectName).zip'
           remoteDirectory: '$(ftp-remote-directory)'
           cleanContents: true
           preservePaths: true
           trustSSL: true
+          clean: true
           # customCmds: 'SITE EXEC unzip -o -q $(ProjectName).zip'
