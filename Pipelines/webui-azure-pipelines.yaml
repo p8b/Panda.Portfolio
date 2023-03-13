@@ -54,7 +54,19 @@ stages:
           cleanTargetFolder: true
           preservePaths: true
           trustSSL: true
-          customCmds: 'put $(System.DefaultWorkingDirectory)/$(ProjectName)/bin/$(BuildConfiguration)/*.zip; cd $(ftp-remote-directory); unzip -o -q *.zip; rm -f *.zip'
+      - task: FtpUpload@2
+        displayName: 'FTP Upload'
+        inputs:
+          credentialsOption: 'inputs'
+          serverUrl: '$(FtpServer)'
+          username: '$(FtpUsername)'
+          password: '$(FtpPassword)'
+          rootDirectory: '$(build.artifactstagingdirectory)'
+          remoteDirectory: '$(ftp-remote-directory)'
+          cleanTargetFolder: true
+          preservePaths: true
+          trustSSL: true
+          customCmds: 'cd $(ftp-remote-directory); unzip -o -q *.zip; rm -f *.zip'
       - task: PublishBuildArtifacts@1
         displayName: Publish drop
         inputs:
