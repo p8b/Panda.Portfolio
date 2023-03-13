@@ -58,12 +58,16 @@ stages:
         steps:
           - download: current
             artifact: drop
-          - task: PowerShell@2
-            displayName: 'Unzip Drop'
+          - task: ExtractFiles@1
             inputs:
-              targetType: 'inline'
+              archiveFilePatterns: '**/drop/$(ProjectName).zip'
+              destinationFolder: '**/drop/$(ProjectName)/'
+              cleanDestinationFolder: true
+              overwriteExistingFiles: false
+          - task: CmdLine@2
+            inputs:
               script: |
-                Expand-Archive -Path "$(Pipeline.Workspace)/drop/$(ProjectName).zip" -DestinationPath "$(Pipeline.Workspace)/drop/$(ProjectName)"
+                tree $(Pipeline.Workspace)/drop/
           - task: FtpUpload@2
             displayName: 'Ftp Upload'
             inputs:
