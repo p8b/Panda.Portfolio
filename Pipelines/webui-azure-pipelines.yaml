@@ -10,7 +10,7 @@ variables:
   - name: BuildConfiguration
     value: Release
   - name: ftp-remote-directory
-    value: '/test.p8b.uk'
+    value: 'test.p8b.uk'
 
 trigger:
   branches:
@@ -47,10 +47,10 @@ stages:
         inputs:
           credentialsOption: 'inputs'
           serverUrl: '$(FTPServer)'
-          username: '$(FTPUsername)'
-          password: '$(FTPPassword)'
+          username: '$(FPTUsername)'
+          password: '$(FPTPassword)'
           rootDirectory: '$(build.artifactstagingdirectory)'
-          remoteDirectory: $(ftp-remote-directory)
+          remoteDirectory: '$(ftp-remote-directory)'
           cleanTargetFolder: true
           preservePaths: true
           trustSSL: true
