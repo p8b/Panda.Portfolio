@@ -9,7 +9,7 @@ variables:
   - name: BuildConfiguration
     value: Release
   - name: ftp-remote-directory
-    value: '/test.p8b.uk'
+    value: 'test.p8b.uk'
 
 trigger:
   branches:
