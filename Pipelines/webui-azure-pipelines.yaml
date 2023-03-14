@@ -9,7 +9,7 @@ variables:
   - name: BuildConfiguration
     value: Release
   - name: ftp-remote-directory
-    value: 'test.p8b.uk/PublishedFilesFromDevOps'
+    value: 'test.p8b.uk'
 
 trigger:
   branches:
@@ -72,5 +72,5 @@ stages:
                 remoteDirectory: '$(ftp-remote-directory)'
                 trustSSL: true
                 clean: true
-                filePatterns: '**/**.zip'
+                filePatterns: '**/$(ProjectName).zip'
                 preservePaths: false
