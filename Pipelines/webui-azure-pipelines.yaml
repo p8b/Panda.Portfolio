@@ -72,5 +72,5 @@ stages:
                 remoteDirectory: '$(ftp-remote-directory)'
                 trustSSL: true
                 clean: true
-                filePatterns: '**/$(ProjectName).zip'
+                filePatterns: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
                 preservePaths: false
