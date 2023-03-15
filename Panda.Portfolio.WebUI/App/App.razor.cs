@@ -49,7 +49,10 @@ public partial class App : ComponentBase, IApp<AppSettings>
             var result = await Storage.GetAsync<AppSettings>(nameof(AppSettings));
 
             if (result.Success && result.Value?.Equals(Settings) is false)
+            {
                 Settings = result.Value;
+                Settings.IsLoading = true;
+            }
             await JSService.PageLoadCompleteCallBack(this, nameof(FullPageLoaded));
             StateHasChanged();
         }
