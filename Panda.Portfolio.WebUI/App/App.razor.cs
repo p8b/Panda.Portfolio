@@ -1,4 +1,5 @@
 ﻿using System.Reflection.Metadata;
+using System.Security.Cryptography;
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
@@ -46,13 +47,17 @@ public partial class App : ComponentBase, IApp<AppSettings>
     {
         if (firstRender)
         {
-            var result = await Storage.GetAsync<AppSettings>(nameof(AppSettings));
-
-            if (result.Success && result.Value?.Equals(Settings) is false)
+            try
             {
-                Settings = result.Value;
-                Settings.IsLoading = true;
+                var result = await Storage.GetAsync<AppSettings>(nameof(AppSettings));
+
+                if (result.Success && result.Value?.Equals(Settings) is false)
+                {
+                    Settings = result.Value;
+                    Settings.IsLoading = true;
+                }
             }
+            catch (CryptographicException) { }
             await JSService.PageLoadCompleteCallBack(this, nameof(FullPageLoaded));
             StateHasChanged();
         }

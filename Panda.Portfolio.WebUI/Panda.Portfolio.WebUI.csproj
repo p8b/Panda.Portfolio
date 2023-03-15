@@ -34,11 +34,13 @@
 	  <None Include="wwwroot\fonts\fa-regular-400.woff2" />
 	  <None Include="wwwroot\fonts\fa-solid-900.woff2" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Panda.Blazor\Panda.MudBlazorLib\Panda.MudBlazorLib.csproj" />
+	</ItemGroup>
 
 	<Target Name="CompileComponentSass" BeforeTargets="CompileGlobalSass" Condition=" '$(Configuration)' == 'Debug' ">
 		<Message Text="Compiling Component SCSS files" Importance="high" />
-		<Exec Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(ComponentScssFiles.Identity)', `.*[/\\]_.*`))"
-			  Command="npm run sass -- --style=compressed --no-source-map %(ComponentScssFiles.Identity) %(relativedir)%(filename).css" />
+		<Exec Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(ComponentScssFiles.Identity)', `.*[/\\]_.*`))" Command="npm run sass -- --style=compressed --no-source-map %(ComponentScssFiles.Identity) %(relativedir)%(filename).css" />
 	</Target>
 
 	<Target Name="CompileGlobalSass" BeforeTargets="Compile" Condition=" '$(Configuration)' == 'Debug' ">

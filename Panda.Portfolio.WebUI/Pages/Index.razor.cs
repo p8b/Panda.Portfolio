@@ -16,13 +16,16 @@
                 const string msg = "Hi, My name is Majid, a Full Stack developer.";
                 await Task.Run(async () =>
                 {
-                    var counter = -5;
+                    var counter = 0;
+                    if (counter == 0)
+                        await Task.Delay(500);
                     for (; ; )
                     {
                         char? character = null;
                         try
                         {
-                            character = msg[counter];
+                            if (counter <= msg.Length - 1)
+                                character = msg[counter];
                         }
                         catch { }
                         if (character is not null)
