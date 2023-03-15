@@ -1,3 +1,7 @@
+using System.Security.Cryptography.X509Certificates;
+
+using Microsoft.AspNetCore.DataProtection;
+
 using MudBlazor.Services;
 
 using Panda.BlazorCore.Services;
@@ -49,14 +53,14 @@ void ConfigureRequests()
 void ConfigureServices()
 {
     var Services = builder.Services;
-
-#if !DEBUG
-    Services.AddDataProtection()
-        .SetApplicationName("p8b-portfolio")
-        .PersistKeysToFileSystem(new DirectoryInfo("../../PersistKeys"))
-        .ProtectKeysWithCertificate(
-    new X509Certificate2("certificate.pfx", builder.Configuration["CertificatePassword"]));
-#endif
+    if (!string.IsNullOrWhiteSpace(builder.Configuration["CertificatePassword"]))
+    {
+        Services.AddDataProtection()
+            .SetApplicationName("p8b-portfolio")
+            .PersistKeysToFileSystem(new DirectoryInfo("../../PersistKeys"))
+            .ProtectKeysWithCertificate(
+        new X509Certificate2("certificate.pfx", builder.Configuration["CertificatePassword"]));
+    }
 
     Services.AddMudServices();
 

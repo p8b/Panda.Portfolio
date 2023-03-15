@@ -34,9 +34,6 @@
 	  <None Include="wwwroot\fonts\fa-regular-400.woff2" />
 	  <None Include="wwwroot\fonts\fa-solid-900.woff2" />
 	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Panda.Blazor\Panda.MudBlazorLib\Panda.MudBlazorLib.csproj" />
-	</ItemGroup>
 
 	<Target Name="CompileComponentSass" BeforeTargets="CompileGlobalSass" Condition=" '$(Configuration)' == 'Debug' ">
 		<Message Text="Compiling Component SCSS files" Importance="high" />
