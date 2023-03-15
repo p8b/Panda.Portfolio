@@ -57,7 +57,7 @@ void ConfigureServices()
     {
         Services.AddDataProtection()
             .SetApplicationName("p8b-portfolio")
-            .PersistKeysToFileSystem(new DirectoryInfo("../../PersistKeys"))
+            .PersistKeysToFileSystem(new DirectoryInfo(builder.Configuration["PersistKeysLocation"] ?? "PersistKeys"))
             .ProtectKeysWithCertificate(
         new X509Certificate2("certificate.pfx", builder.Configuration["CertificatePassword"]));
     }
