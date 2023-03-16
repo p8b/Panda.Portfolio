@@ -63,13 +63,13 @@ stages:
             steps:
             - download: current
               artifact: drop
-            - task: ReplaceTokens@3
-              displayName: 'Replace appsettings.json variables'
-              inputs:
-                targetFiles: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
-                tokenPrefix: '#{'
-                tokenSuffix: '}#'
-                actionOnMissing: 'warn'
+            # - task: ReplaceTokens@3
+            #   displayName: 'Replace appsettings.json variables'
+            #   inputs:
+            #     targetFiles: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
+            #     tokenPrefix: '#{'
+            #     tokenSuffix: '}#'
+            #     actionOnMissing: 'warn'
             - task: FtpUpload@2
               displayName: 'Ftp Upload'
               inputs:
