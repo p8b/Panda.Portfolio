@@ -67,6 +67,8 @@ stages:
               displayName: 'Replace appsettings.json variables'
               inputs:
                 targetFiles: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
+                tokenPrefix: '#{'
+                tokenSuffix: '}#'
                 actionOnMissing: 'warn'
             - task: FtpUpload@2
               displayName: 'Ftp Upload'
