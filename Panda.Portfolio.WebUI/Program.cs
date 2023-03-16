@@ -1,11 +1,13 @@
 using System.Security.Cryptography.X509Certificates;
 
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.EntityFrameworkCore;
 
 using MudBlazor.Services;
 
 using Panda.BlazorCore.Services;
 using Panda.BlazorCore.Services.Interfaces;
+using Panda.Portfolio.WebUI.DataProtection;
 
 using Serilog;
 
@@ -55,9 +57,12 @@ void ConfigureServices()
     var Services = builder.Services;
     if (!string.IsNullOrWhiteSpace(builder.Configuration["CertificatePassword"]))
     {
+        Services.AddDbContext<DataProtectionDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DataProtectionDatabase")));
+
         Services.AddDataProtection()
             .SetApplicationName("p8b-portfolio")
-            .PersistKeysToFileSystem(new DirectoryInfo(builder.Configuration["PersistKeysLocation"] ?? "PersistKeys"))
+            .PersistKeysToDbContext<DataProtectionDbContext>()
             .ProtectKeysWithCertificate(
         new X509Certificate2("certificate.pfx", builder.Configuration["CertificatePassword"]));
     }

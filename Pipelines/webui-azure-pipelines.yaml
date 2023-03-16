@@ -2,7 +2,6 @@ variables:
   - group: 'GitHub Details'
   - group: 'NuGet Feed'
   - group: 'FTP Details'
-  - group: 'test.p8b.uk-certificate'
   - name: ProjectName
     value: 'Panda.Portfolio.WebUI'
   - name: ProjectDisplayName
@@ -56,6 +55,8 @@ stages:
       displayName: Publish To Mocha Host ftp Server
       environment:
         name: 'Production'
+      variables:
+        - group: 'test.p8b.uk-certificate'
       strategy:
         runOnce:
           deploy:
@@ -66,8 +67,6 @@ stages:
               displayName: 'Replace appsettings.json variables'
               inputs:
                 targetFiles: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
-                tokenPrefix: '#{'
-                tokenSuffix: '}#'
                 actionOnMissing: 'warn'
             - task: FtpUpload@2
               displayName: 'Ftp Upload'
