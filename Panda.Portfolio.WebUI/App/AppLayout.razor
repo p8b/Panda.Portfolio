@@ -36,7 +36,8 @@
 </MudLayout>
 
 @code{
-    private string LogoSrc => $"https://static.p8b.uk/public/images/P8B/Logo-{(AppState.Settings.IsDarkTheme ? "Light" : "Dark")}.png";
+    //private string LogoSrc => $"https://static.p8b.uk/public/images/P8B/Logo-{(AppState.Settings.IsDarkTheme ? "Light" : "Dark")}.png";
+    private string LogoSrc => $"https://static.p8b.uk/public/images/P8B/panda-logo.png";
     private string bgImage => $"hex-bg {(AppState.Settings.IsDarkTheme ? "hex-bg-white" : "hex-bg-dark")}";
     private string icon => Icons.Material.Filled.HorizontalRule + (AppState.Settings.NavDrawerOpen ? Icons.Material.Filled.ArrowBackIosNew : Icons.Material.Filled.ArrowForwardIos);
 
