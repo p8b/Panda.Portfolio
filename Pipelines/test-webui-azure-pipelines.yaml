@@ -1,0 +1,84 @@
+variables:
+  - group: 'GitHub Details'
+  - group: 'NuGet Feed'
+  - name: ProjectName
+    value: 'Panda.Portfolio.WebUI'
+  - name: ProjectDisplayName
+    value: 'Panda.Portfolio.WebUI'
+  - name: BuildConfiguration
+    value: Release
+  - name: ftp-remote-directory
+    value: 'test.p8b.uk'
+
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - p8b/Panda.Portfolio.WebUI/Panda.Portfolio.WebUI.csproj
+
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildJob
+        displayName: Build App
+        pool:
+          name: Azure Pipelines
+        steps:
+          - checkout: self
+          - task: DotNetCoreCLI@2
+            displayName: Restore Project
+            inputs:
+              command: restore
+              projects: '**/$(ProjectName).csproj'
+              feedRestore: '$(FeedId)'
+          - task: DotNetCoreCLI@2
+            displayName: Publish Project
+            inputs:
+              command: 'publish'
+              publishWebProjects: false
+              projects: '**/$(ProjectName).csproj'
+              arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+          - task: PublishBuildArtifacts@1
+            displayName: Publish drop
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+  - stage: FtpUpload
+    displayName: 'Ftp Upload'
+    dependsOn: Build
+    jobs:
+    - deployment: FtpUploadJob
+      displayName: Publish To Mocha Host ftp Server
+      environment:
+        name: 'Production'
+      variables:
+        - group: 'test.p8b.uk-certificate'
+        - group: 'FTP Details'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - download: current
+              artifact: drop
+            - task: FileTransform@1
+              displayName: 'File transformation: appsettings.json'
+              inputs:
+                folderPath: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
+                targetFiles: '**/appsettings.json'
+                fileType: json
+            - task: FtpUpload@2
+              displayName: 'Ftp Upload'
+              inputs:
+                credentialsOption: 'inputs'
+                serverUrl: '$(FtpServer)'
+                username: '$(FtpUsername)'
+                password: '$(FtpPassword)'
+                rootDirectory: '$(Pipeline.Workspace)/drop'
+                remoteDirectory: '$(ftp-remote-directory)'
+                trustSSL: true
+                clean: true
+                filePatterns: '**/$(ProjectName).zip'
+                preservePaths: false
