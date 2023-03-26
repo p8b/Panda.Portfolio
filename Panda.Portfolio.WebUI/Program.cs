@@ -55,16 +55,22 @@ void ConfigureRequests()
 void ConfigureServices()
 {
     var Services = builder.Services;
-    if (!string.IsNullOrWhiteSpace(builder.Configuration["CertificatePassword"]))
+    string? certPass = builder.Configuration["CertificatePassword"];
+    if (!string.IsNullOrWhiteSpace(certPass))
     {
         Services.AddDbContext<DataProtectionDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DataProtectionDatabase")));
+        string certPath = Directory.GetCurrentDirectory() + "\\certificate.pfx";
+
+        // Create a collection object and populate it using the PFX file
+        var collection = new X509Certificate2Collection();
+        collection.Import(certPath, certPass, X509KeyStorageFlags.PersistKeySet);
+        var cert = collection.FirstOrDefault()!;
 
         Services.AddDataProtection()
             .SetApplicationName("p8b-portfolio")
             .PersistKeysToDbContext<DataProtectionDbContext>()
-            .ProtectKeysWithCertificate(
-        new X509Certificate2("certificate.pfx", builder.Configuration["CertificatePassword"]));
+            .ProtectKeysWithCertificate(cert);
     }
 
     Services.AddMudServices();
