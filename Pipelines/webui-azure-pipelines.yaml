@@ -1,7 +1,6 @@
 variables:
   - group: 'GitHub Details'
   - group: 'NuGet Feed'
-  - group: 'FTP Details'
   - name: ProjectName
     value: 'Panda.Portfolio.WebUI'
   - name: ProjectDisplayName
@@ -9,7 +8,7 @@ variables:
   - name: BuildConfiguration
     value: Release
   - name: ftp-remote-directory
-    value: 'test.p8b.uk'
+    value: 'majid.joveini.p8b.uk'
 
 trigger:
   branches:
@@ -56,20 +55,20 @@ stages:
       environment:
         name: 'Production'
       variables:
-        - group: 'test.p8b.uk-certificate'
+        - group: 'majid.joveini.p8b.uk-certificate'
+        - group: 'FTP Details'
       strategy:
         runOnce:
           deploy:
             steps:
             - download: current
               artifact: drop
-            # - task: ReplaceTokens@3
-            #   displayName: 'Replace appsettings.json variables'
-            #   inputs:
-            #     targetFiles: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
-            #     tokenPrefix: '#{'
-            #     tokenSuffix: '}#'
-            #     actionOnMissing: 'warn'
+            - task: FileTransform@1
+              displayName: 'File transformation: appsettings.json'
+              inputs:
+                folderPath: '$(Pipeline.Workspace)/drop/$(ProjectName).zip'
+                targetFiles: '**/appsettings.json'
+                fileType: json
             - task: FtpUpload@2
               displayName: 'Ftp Upload'
               inputs:
