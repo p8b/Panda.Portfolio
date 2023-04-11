@@ -24,10 +24,10 @@
 		</div>
 	</MudItem>
 	<MudItem xs="@(CubeDisplaySize > Width.md ? 0 : 12)">
-		<div class="d-flex">
-			<div class="mx-auto"style="width:22em">
+        <div class="d-flex">
+            <div class="mx-auto" style="width:25em">
 				<MudGrid >
-					<MudItem xs="12" Class="px-0">
+					<MudItem xs="12">
 						@foreach (var face in Enum.GetValues<FaceSide>())
 						{
 							<MudButtonGroup Variant="Variant.Outlined"
