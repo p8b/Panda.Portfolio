@@ -8,8 +8,8 @@
 <MudGrid Class="d-flex justify-center">
 	<MudItem xs="12">
 		<MudText Typo="Typo.h3">Rubik's Cube</MudText>
-		@*<ContainerSettings />
-		<ThemeSettings />*@
+		<ContainerSettings />
+		<ThemeSettings />
 	</MudItem>
 	<MudItem xs="@(CubeDisplaySize > Width.md ? 0 : 12)">
 		<div class="d-flex">
@@ -29,7 +29,7 @@
 		<div class="d-flex">
 			<div class="mx-auto"style="width:22em">
 				<MudGrid >
-					<MudItem xs="12">
+					<MudItem xs="12" Class="px-0">
 						@foreach (var face in Enum.GetValues<FaceSide>())
 						{
 							<MudButtonGroup Variant="Variant.Outlined"
