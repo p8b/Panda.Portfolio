@@ -1,0 +1,100 @@
+﻿@using MudBlazor.Services;
+@using Panda.Portfolio.WebUI.Pages.SettingsPage
+@using Panda.RubikCube.Entities;
+@using Panda.RubikCube;
+@using Panda.RubikCube.Enums;
+@attribute [Route(NavMenu.RubikCubeGame)]
+@implements IAsyncDisposable
+<MudGrid Class="d-flex justify-center">
+	<MudItem xs="12">
+		<MudText Typo="Typo.h3">Rubik's Cube</MudText>
+		@*<ContainerSettings />
+		<ThemeSettings />*@
+	</MudItem>
+	<MudItem xs="@(CubeDisplaySize > Width.md ? 0 : 12)">
+		<div class="d-flex">
+			<div class="@($"scrambler mx-auto {CubeDisplaySize.ToString()}")">
+				<div class="@($"wrap-cube {CubeDisplaySize.ToString()}")">
+					@foreach (var face in Enum.GetValues<FaceSide>())
+					{
+						<CubeFaceComponent CubeFace="Cube.Faces[(int)face]"
+							ShowCoordinates="ShowCoordinates"
+							CubeDisplaySize="CubeDisplaySize" />
+					}
+				</div>
+			</div>
+		</div>
+	</MudItem>
+	<MudItem xs="@(CubeDisplaySize > Width.md ? 0 : 12)">
+		<div class="d-flex">
+			<div class="mx-auto"style="width:22em">
+				<MudGrid >
+					<MudItem xs="12">
+						@foreach (var face in Enum.GetValues<FaceSide>())
+						{
+							<MudButtonGroup Variant="Variant.Outlined"
+								DisableElevation
+								VerticalAlign="true"
+								Size="Size.Small"
+								OverrideStyles="true">
+								<MudFab Label="@(face.ToString()[0].ToString())"
+									Class="group-button-local"
+									OnClick="@(()=> Move(face, Rotation.Clockwise))" />
+								<MudFab Label="@($"{face.ToString()[0].ToString()}'")"
+									Class="group-button-local"
+									OnClick="@(()=> Move(face, Rotation.CounterClockwise))" />
+							</MudButtonGroup>
+						}
+					</MudItem>
+					<MudItem xs="12">
+						<MudFab Label="@(Cube.Mixing ? "Mixing up" : "Mix up")"
+							DisableElevation
+							OnClick="MixUp" />
+						<MudFab Label="@(Cube.Solving ? "Solving" : "Solve")"
+							DisableElevation
+							Disabled="@Cube.Solved"
+							OnClick="Solve"/>
+						<MudFab Label="Reset"
+							DisableElevation
+							OnClick="Reset"/>
+					</MudItem>
+					<MudItem xs="12">
+						<MudExpansionPanels>
+							<MudExpansionPanel IsInitiallyExpanded="false"
+								Text="@($"History ({Cube.MoveHistory.Count})")">
+								<div style="max-height:200px; overflow-y:scroll;">
+									@GetHistory()
+								</div>
+							</MudExpansionPanel>
+						</MudExpansionPanels>
+					</MudItem>
+					<MudItem xs="12">
+						<MudExpansionPanels>
+							<MudExpansionPanel IsInitiallyExpanded="false" Text="Settings">
+								<MudGrid>
+										<MudItem xs="12">
+										<MudSelect T="int"
+											Label="Cube Size"
+											Value="CubeSize"
+											ValueChanged="SetCubeSize">
+											<MudSelectItem Value="1" />
+											<MudSelectItem Value="2" />
+											<MudSelectItem Value="3" />
+										</MudSelect>
+									</MudItem>
+									<MudItem xs="12" Class="d-flex">
+										<MudFab Label="Toggle Coordinates"
+											Class="mx-auto"
+											DisableElevation
+											OnClick="ToggleCoordinates" />
+									</MudItem>
+								</MudGrid>
+							</MudExpansionPanel>
+						</MudExpansionPanels>
+					</MudItem>
+				</MudGrid>
+			</div>
+		</div>
+	</MudItem>
+</MudGrid>
+

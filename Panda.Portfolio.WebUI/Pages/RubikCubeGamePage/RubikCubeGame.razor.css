@@ -1,0 +1,53 @@
+﻿.wrap-cube {
+    margin: auto;
+    position: relative;
+    width: 100%;
+    height: 0px;
+}
+
+    .wrap-cube.xs {
+        height: 20em;
+    }
+
+    .wrap-cube.sm {
+        height: 25em;
+    }
+
+    .wrap-cube.md, .wrap-cube.lg {
+        height: 32em;
+    }
+
+    .wrap-cube.xl {
+        height: 43em;
+    }
+
+.scrambler {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    clear: both;
+    overflow: hidden;
+    width: 0;
+}
+
+    .scrambler.xs {
+        width: 30.2em;
+    }
+
+    .scrambler.sm {
+        width: 35.2em;
+    }
+
+    .scrambler.md, .scrambler.lg {
+        width: 42.2em;
+    }
+
+    .scrambler.xl {
+        width: 58.2em;
+    }
+
+::deep .group-button-local {
+    font-weight: 600 !important;
+    border-width: 2.5px !important;
+    margin-right: 2px !important;
+}

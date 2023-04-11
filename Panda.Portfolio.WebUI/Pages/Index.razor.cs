@@ -13,7 +13,7 @@
             {
                 displayMessageRenderStarted = true;
                 StateHasChanged();
-                const string msg = "Hi, My name is Majid, a Full Stack developer.";
+                const string msg = "Hi, my name is Majid, a Full Stack developer.";
                 await Task.Run(async () =>
                 {
                     var counter = 0;

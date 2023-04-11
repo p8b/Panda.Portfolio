@@ -1,0 +1,14 @@
+﻿@using Panda.RubikCube.Entities;
+<div class="@($"{Cubelet.Colour.ToString().ToLower()} cubelet {CubeDisplaySize}  cube-size-{CubeSize}")">
+    @if (ShowCoordinates)
+    {
+        <b>@Cubelet.OriginalPositon.row,@Cubelet.OriginalPositon.column</b>
+    }
+</div>
+@code {
+    [Parameter, EditorRequired] public Cubelet Cubelet { get; set; } = default!;
+    [Parameter] public bool ShowCoordinates { get; set; }
+    [Parameter] public string CubeDisplaySize { get; set; } = string.Empty;
+    [Parameter] public int CubeSize { get; set; } = 1;
+
+}

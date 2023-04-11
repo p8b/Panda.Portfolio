@@ -18,6 +18,7 @@
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
 	<PackageReference Include="Panda.MudBlazorLib" Version="1.0.0-pre.3" />
+	<PackageReference Include="Panda.RubikCube" Version="1.0.0-pre.1" />
 	<PackageReference Include="Panda.SerilogLib" Version="1.0.0-pre.1" />
   </ItemGroup>
 

@@ -1,0 +1,170 @@
+﻿.cube-face {
+    position: absolute;
+    overflow: hidden;
+    margin: auto;
+    width: 0;
+    height: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 5px;
+    -webkit-box-shadow: 2px 2px 2px 0px var(--mud-palette-text-primary);
+    -moz-box-shadow: 2px 2px 2px 0px var(--mud-palette-text-primary);
+    box-shadow: 2px 2px 2px 0px var(--mud-palette-text-primary);
+    -webkit-border-radius: 5px;
+    transition-property: width, height;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-property: width, height;
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-in-out;
+}
+
+    .cube-face.xs {
+        width: 6.2em;
+        height: 6.2em;
+    }
+
+    .cube-face.sm {
+        width: 8em;
+        height: 8em;
+    }
+
+    .cube-face.md, .cube-face.lg {
+        width: 10em;
+        height: 10em;
+    }
+
+    .cube-face.xl {
+        width: 14em;
+        height: 14em;
+    }
+
+/*#region xs face positions */
+#up-face.xs {
+    top: -13em;
+    left: -6em;
+}
+
+#left-face.xs {
+    top: 0em;
+    left: -19em;
+}
+
+#front-face.xs {
+    top: 0em;
+    left: -6em;
+}
+
+#right-face.xs {
+    top: 0;
+    left: 7em;
+}
+
+#back-face.xs {
+    top: 0;
+    left: 20em;
+}
+
+#down-face.xs {
+    top: 13em;
+    left: -6em;
+}
+/*#endregion xs faces */
+
+/*#region sm face positions */
+#up-face.sm {
+    top: -16.6em;
+    left: -8.5em;
+}
+
+#left-face.sm {
+    top: 0em;
+    left: -25em;
+}
+
+#front-face.sm {
+    top: 0em;
+    left: -8.5em;
+}
+
+#right-face.sm {
+    top: 0;
+    left: 8em;
+}
+
+#back-face.sm {
+    top: 0;
+    left: 24.5em;
+}
+
+#down-face.sm {
+    top: 16.6em;
+    left: -8.5em;
+}
+/*#endregion sm faces */
+
+/*#region md & lg face positions */
+#up-face.md, #up-face.lg {
+    top: -21em;
+    left: -10em;
+}
+
+#left-face.md, #left-face.lg {
+    top: 0em;
+    left: -31em;
+}
+
+#front-face.md, #front-face.lg {
+    top: 0em;
+    left: -10em;
+}
+
+#right-face.md, #right-face.lg {
+    top: 0;
+    left: 11em;
+}
+
+#back-face.md, #back-face.lg {
+    top: 0;
+    left: 32em;
+}
+
+#down-face.md, #down-face.lg {
+    top: 21em;
+    left: -10em;
+}
+/*#endregion md and lg faces */
+
+/*#region xl face positions */
+#up-face.xl {
+    top: -29em;
+    left: -14em;
+}
+
+#left-face.xl {
+    top: 0em;
+    left: -43em;
+}
+
+#front-face.xl {
+    top: 0em;
+    left: -14em;
+}
+
+#right-face.xl {
+    top: 0;
+    left: 15em;
+}
+
+#back-face.xl {
+    top: 0;
+    left: 44em;
+}
+
+#down-face.xl {
+    top: 29em;
+    left: -14em;
+}
+/*#endregion xl faces */

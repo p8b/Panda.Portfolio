@@ -1,0 +1,18 @@
+﻿@using MudBlazor.Services;
+@using Panda.RubikCube.Entities;
+<div id="@($"{CubeFace.OriginalFace.ToString().ToLower()}-face")"
+     class="@($"cube-face {CubeDisplaySize.ToString()}")">
+    @foreach (var item in CubeFace.Cubelets)
+    {
+        <CubeletComponent Cubelet="item"
+            ShowCoordinates="ShowCoordinates"
+            CubeDisplaySize="@CubeDisplaySize.ToString()"
+            CubeSize="@CubeFace.FaceSize"/>
+    }
+</div>
+
+@code{
+    [Parameter, EditorRequired] public CubeFace CubeFace { get; set; } = default!;
+    [Parameter] public bool ShowCoordinates { get; set; }
+    [Parameter] public Width CubeDisplaySize { get; set; } = Width.False;
+}
