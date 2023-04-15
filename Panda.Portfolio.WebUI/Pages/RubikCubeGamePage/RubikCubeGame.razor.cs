@@ -143,13 +143,13 @@ namespace Panda.Portfolio.WebUI.Pages.RubikCubeGamePage
 
 		private void MouseoverClockwise(FaceSide faceSide)
 		{
-			moveHoverWrapClass = faceSide.ToString().ToLower() + "-clockwise";
+			moveHoverWrapClass = $"{faceSide.ToString().ToLower()}-hover clockwise-hover ";
 			StateHasChanged();
 		}
 
 		private void MouseoverCounterclockwise(FaceSide faceSide)
 		{
-			moveHoverWrapClass = faceSide.ToString().ToLower() + "-counterclockwise";
+			moveHoverWrapClass = $"{faceSide.ToString().ToLower()}-hover counter-clockwise-hover ";
 			StateHasChanged();
 		}
 
