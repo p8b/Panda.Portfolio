@@ -49,5 +49,66 @@
 ::deep .group-button-local {
     font-weight: 600 !important;
     border-width: 2.5px !important;
-    margin-right: 2px !important;
+}
+
+::deep .wrap-cube > .cube-face::before {
+    font-family: "FA5 Solid";
+    font-style: normal;
+    display: none;
+    color: rgba(0,0,0,.5 );
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+::deep .wrap-cube.xs > .cube-face::before {
+    font-size: 4em;
+}
+
+::deep .wrap-cube.sm > .cube-face::before {
+    font-size: 6em;
+}
+
+::deep .wrap-cube.md > .cube-face::before, ::deep .wrap-cube.lg > .cube-face::before {
+    font-size: 8em;
+}
+
+::deep .wrap-cube.xl > .cube-face::before {
+    font-size: 12em;
+}
+
+::deep .wrap-cube.clockwise-hover > .cube-face::before {
+    content: "\f2f9";
+}
+
+::deep .wrap-cube.counter-clockwise-hover > .cube-face::before {
+    content: "\f2ea";
+}
+
+::deep .wrap-cube.front-hover > #front-face::before {
+    display: flex;
+}
+
+::deep .wrap-cube.right-hover > #right-face::before {
+    display: flex;
+}
+
+::deep .wrap-cube.left-hover > #left-face::before {
+    display: flex;
+}
+
+::deep .wrap-cube.up-hover > #up-face::before {
+    display: flex;
+}
+
+::deep .wrap-cube.back-hover > #back-face::before {
+    display: flex;
+}
+
+::deep .wrap-cube.down-hover > #down-face::before {
+    display: flex;
 }

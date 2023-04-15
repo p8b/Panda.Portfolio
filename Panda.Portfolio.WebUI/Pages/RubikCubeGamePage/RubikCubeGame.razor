@@ -8,11 +8,13 @@
 <MudGrid Class="d-flex justify-center">
 	<MudItem xs="12">
 		<MudText Typo="Typo.h3">Rubik's Cube</MudText>
+		<ContainerSettings />
+		<ThemeSettings />
 	</MudItem>
 	<MudItem xs="@(CubeDisplaySize > Width.md ? 0 : 12)">
 		<div class="d-flex">
 			<div class="@($"scrambler mx-auto {CubeDisplaySize.ToString()}")">
-				<div class="@($"wrap-cube {CubeDisplaySize.ToString()}")">
+				<div class="@($"wrap-cube {moveHoverWrapClass} {CubeDisplaySize.ToString()}")">
 					@foreach (var face in Enum.GetValues<FaceSide>())
 					{
 						<CubeFaceComponent CubeFace="Cube.Faces[(int)face]"
@@ -36,11 +38,15 @@
 								Size="Size.Small"
 								OverrideStyles="true">
 								<MudFab Label="@(face.ToString()[0].ToString())"
-									Class="group-button-local"
+									Class="@($"group-button-local")"
+									onmouseover="@(() => MouseoverClockwise(face))"
+									onmouseout="@(()=> MouseOut())"
 									OnClick="@(()=> Move(face, Rotation.Clockwise))" />
 								<MudFab Label="@($"{face.ToString()[0].ToString()}'")"
-									Class="group-button-local"
-									OnClick="@(()=> Move(face, Rotation.CounterClockwise))" />
+									Class="@($"group-button-local")"
+									onmouseover="@(() => MouseoverCounterclockwise(face))"
+									onmouseout="@(()=> MouseOut())"
+ 									OnClick="@(()=> Move(face, Rotation.CounterClockwise))" />
 							</MudButtonGroup>
 						}
 					</MudItem>

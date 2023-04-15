@@ -12,6 +12,7 @@ namespace Panda.Portfolio.WebUI.Pages.RubikCubeGamePage
 {
 	public partial class RubikCubeGame : IAsyncDisposable
 	{
+		private string moveHoverWrapClass { get; set; }
 		private bool ShowCoordinates { get; set; }
 		private int CubeSize { get; set; } = 3;
 		private RubiksCube Cube { get; set; }
@@ -138,6 +139,24 @@ namespace Panda.Portfolio.WebUI.Pages.RubikCubeGamePage
 			result.Add(result100Char);
 
 			return (MarkupString)string.Concat(result);
+		}
+
+		private void MouseoverClockwise(FaceSide faceSide)
+		{
+			moveHoverWrapClass = faceSide.ToString().ToLower() + "-clockwise";
+			StateHasChanged();
+		}
+
+		private void MouseoverCounterclockwise(FaceSide faceSide)
+		{
+			moveHoverWrapClass = faceSide.ToString().ToLower() + "-counterclockwise";
+			StateHasChanged();
+		}
+
+		private void MouseOut()
+		{
+			moveHoverWrapClass = string.Empty;
+			StateHasChanged();
 		}
 
 		public async ValueTask DisposeAsync() => await BreakpointListener.Unsubscribe(_subscriptionId);
