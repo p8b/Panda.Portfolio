@@ -24,10 +24,10 @@
 		</div>
 	</MudItem>
 	<MudItem xs="@(CubeDisplaySize > Width.md ? 0 : 12)">
-        <div class="d-flex">
-            <div class="mx-auto" style="width:25em">
+		<div class="d-flex">
+			<div class="mx-auto" style="width:25em">
 				<MudGrid >
-					<MudItem xs="12">
+					<MudItem xs="12" Class="d-flex justify-space-between">
 						@foreach (var face in Enum.GetValues<FaceSide>())
 						{
 							<MudButtonGroup Variant="Variant.Outlined"
@@ -45,24 +45,42 @@
 						}
 					</MudItem>
 					<MudItem xs="12">
-						<MudFab Label="@(Cube.Mixing ? "Mixing up" : "Mix up")"
+						<MudButtonGroup Variant="Variant.Filled"
+							Class="d-flex gap-2 flex-grow-1"
 							DisableElevation
-							OnClick="MixUp" />
-						<MudFab Label="@(Cube.Solving ? "Solving" : "Solve")"
-							DisableElevation
-							Disabled="@Cube.Solved"
-							OnClick="Solve"/>
-						<MudFab Label="Reset"
-							DisableElevation
-							OnClick="Reset"/>
+							OverrideStyles="true">
+							<MudButton DisableElevation
+								FullWidth
+								OnClick="MixUp" >
+								@(Cube.Mixing ? "Mixing up" : "Mix up")
+							</MudButton>
+							<MudButton DisableElevation
+								FullWidth
+								Disabled="@Cube.Solved"
+								OnClick="Solve">
+								@(Cube.Solving ? "Solving" : "Solve")
+							</MudButton>
+						</MudButtonGroup>
 					</MudItem>
 					<MudItem xs="12">
 						<MudExpansionPanels>
-							<MudExpansionPanel IsInitiallyExpanded="false"
-								Text="@($"History ({Cube.MoveHistory.Count})")">
-								<div style="max-height:200px; overflow-y:scroll;">
-									@GetHistory()
-								</div>
+							<MudExpansionPanel IsInitiallyExpanded="false">
+								<TitleContent>
+									<div class="d-flex align-center">
+										<MudText Class="mr-2">@($"History ({Cube.MoveHistory.Count})")</MudText>
+										<MudButton Size="Size.Small"
+											DisableElevation
+											Disabled="@(Cube.MoveHistory.Count == 0)"
+											OnClick="Clear" >
+											Clear
+										</MudButton>
+									</div>
+								</TitleContent>
+								<ChildContent>
+									<div style="max-height:200px; overflow-y:scroll;">
+										@GetHistory()
+									</div>
+								</ChildContent>
 							</MudExpansionPanel>
 						</MudExpansionPanels>
 					</MudItem>

@@ -53,7 +53,7 @@ namespace Panda.Portfolio.WebUI.Pages.RubikCubeGamePage
 			StateHasChanged();
 		}
 
-		private void Reset()
+		private void Clear()
 		{
 			Cube = new RubiksCube(_solver, new(CubeSize));
 			StateHasChanged();
